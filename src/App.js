@@ -6,7 +6,9 @@ function App() {
   return (
     <div>
       <Bill />
-      <Percentage />
+      <Percentage placeholder="How did you like the service " />
+      <Percentage placeholder="How did your friend like the service " />
+      <h2>You pay $100 ($100 + $0 tip)</h2>
     </div>
   );
 }
