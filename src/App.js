@@ -29,7 +29,7 @@ function Percentage({ placeholder }) {
   return (
     <div>
       {placeholder}
-      <select>
+      <select onChange={(e) => setPercent(e.target.value)}>
         <option value={0}>Dissatisfied(0%)</option>
         <option value={5}>it was okay (5%)</option>
         <option value={10}>it was good (10%)</option>
