@@ -3,35 +3,56 @@
 import { useState } from "react";
 
 function App() {
+  const [bill, setBill] = useState(0);
+
+  const [percent, setPercent] = useState(0);
+  const [percentFriend, setPercentFriend] = useState(0);
+
+  function handlePercent(e) {
+    setPercent(e.target.value);
+  }
+  function handlePercentFriend(e) {
+    setPercentFriend(e.target.value);
+  }
+
+  function handleBill(e) {
+    setBill(e.target.value);
+  }
+
+  const tip = (0.01 * bill * percent + 0.01 * bill * percentFriend) / 2;
   return (
     <div>
-      <Bill />
-      <Percentage placeholder="How did you like the service " />
-      <Percentage placeholder="How did your friend like the service " />
-      <h2>You pay $100 ($100 + $0 tip)</h2>
+      <Bill bill={bill} handleBill={handleBill} />
+      <Percentage
+        placeholder="How did you like the service "
+        percent={percent}
+        handlePercent={handlePercent}
+      />
+      <Percentage
+        placeholder="How did your friend like the service "
+        handlePercent={handlePercentFriend}
+        percent={percentFriend}
+      />
+      <h2>
+        You pay ${bill} (${bill + tip} + ${tip} tip)
+      </h2>
     </div>
   );
 }
-function Bill() {
-  const [bill, setBill] = useState(0);
+function Bill({ bill, handleBill }) {
   return (
     <div>
       <p></p>
       {"How much was the bill? "}
-      <input
-        type="number"
-        value={bill}
-        onChange={(e) => setBill(e.target.value)}
-      />
+      <input type="number" value={bill} onChange={handleBill} />
     </div>
   );
 }
-function Percentage({ placeholder }) {
-  const [percent, setPercent] = useState(0);
+function Percentage({ placeholder, percent, handlePercent }) {
   return (
     <div>
       {placeholder}
-      <select onChange={(e) => setPercent(e.target.value)}>
+      <select onChange={handlePercent}>
         <option value={0}>Dissatisfied(0%)</option>
         <option value={5}>it was okay (5%)</option>
         <option value={10}>it was good (10%)</option>
