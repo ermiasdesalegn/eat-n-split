@@ -38,3 +38,4 @@ function FriendsList() {
     </ul>
   );
 }
+function Friend({ friend }) {}
