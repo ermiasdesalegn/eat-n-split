@@ -38,6 +38,11 @@ function FriendsList() {
     </ul>
   );
 }
+
+function Button({ children }) {
+  <button className="button">Select</button>;
+}
+
 function Friend({ friend }) {
   return (
     <li>
@@ -56,7 +61,7 @@ function Friend({ friend }) {
       {friend.balance === 0 && (
         <p className="">You and {friend.name} are even</p>
       )}
-      <button className="button">Select</button>
+      <Button>Select</Button>
     </li>
   );
 }
