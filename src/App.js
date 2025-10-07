@@ -33,9 +33,11 @@ function FriendsList() {
   return (
     <ul>
       {friends.map((friend) => (
-        <li>{friend.name}</li>
+        <Friend friend={friend} key={friend.id} />
       ))}
     </ul>
   );
 }
-function Friend({ friend }) {}
+function Friend({ friend }) {
+  return <li>{friend.name}</li>;
+}
