@@ -40,7 +40,7 @@ function FriendsList() {
 }
 
 function Button({ children }) {
-  <button className="button">Select</button>;
+  return <button className="button">{children}</button>;
 }
 
 function Friend({ friend }) {
