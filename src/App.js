@@ -41,7 +41,7 @@ export default function App() {
         {showAddFriend && <FriendForm />}
         <Button onClick={handleShowAddFriend}>
           {" "}
-          {showAddFriend ? "friend" : ""}
+          {showAddFriend ? "friend" : "close"}
         </Button>
       </div>
       <div className="">
