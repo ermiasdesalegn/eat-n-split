@@ -103,14 +103,14 @@ function FormSplitBill() {
 }
 function FriendForm() {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("https://i.pravatar.cc/48");
   return (
     <form className="form-add-friend">
       <label>🧑‍🤝‍🧑Friend name</label>
       <input
         type="text"
         value={name}
-        onChange={(e) => e.setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
       <label>🖼️ Image URL</label>
       <input
