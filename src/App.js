@@ -108,6 +108,7 @@ function FriendForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (!name || !image) return;
     const id = crypto.randomUUID();
     const newFriend = {
       id,
@@ -116,6 +117,9 @@ function FriendForm() {
       balance: 0,
     };
     console.log(newFriend);
+
+    setName("");
+    setImage("https://i.pravatar.cc/48");
   }
 
   return (
