@@ -128,14 +128,14 @@ function Friend({ friend, handleSelection, selectedFriend }) {
 function FormSplitBill({ selectedFriend, onSplitBill }) {
   const [bill, setBill] = useState("");
   const [paidByUser, setPaidByUser] = useState("");
-  const [whoIsPaying, setWhoIsPaying] = useState("");
+  const [whoIsPaying, setWhoIsPaying] = useState("user");
   const paidByFriend = bill ? bill - paidByUser : "";
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSplitBill(whoIsPaying === "user" ? -paidByFriend : paidByUser);
+    if (!bill || !paidByUser) return;
+    onSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUser);
   }
-  if (!bill || !paidByUser) return;
 
   return (
     <form className="form-split-bill" onSubmit={handleSubmit}>
