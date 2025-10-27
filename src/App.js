@@ -91,90 +91,82 @@ function App() {
         
         {bill > 0 && (
           <div style={{
-            marginTop: "40px",
-            padding: "30px",
-            background: "linear-gradient(135deg, #ff6b6b15 0%, #ffa50015 100%)",
-            borderRadius: "16px",
-            border: "2px solid #ffa500",
-            boxShadow: "0 4px 15px rgba(255, 165, 0, 0.1)"
+            marginTop: "45px",
+            padding: "35px",
+            background: "rgba(26, 31, 58, 0.5)",
+            borderRadius: "20px",
+            border: "1px solid rgba(64, 224, 208, 0.2)"
           }}>
-            <div style={{
-              textAlign: "center",
-              marginBottom: "20px"
+            <h2 style={{
+              color: "#40e0d0",
+              marginBottom: "25px",
+              fontSize: "22px",
+              fontWeight: "600",
+              textAlign: "center"
             }}>
-              <h2 style={{
-                background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                marginBottom: "20px",
-                fontSize: "28px",
-                fontWeight: "bold"
-              }}>
-                ✨ Your Bill Breakdown
-              </h2>
-            </div>
+              Breakdown
+            </h2>
             
             <div style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "15px",
-              marginBottom: "20px"
+              gap: "18px",
+              marginBottom: "25px"
             }}>
               <div style={{
-                padding: "15px",
-                backgroundColor: "white",
-                borderRadius: "12px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+                padding: "20px",
+                backgroundColor: "#0f1629",
+                borderRadius: "16px",
+                border: "1px solid rgba(64, 224, 208, 0.1)"
               }}>
-                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>Bill Amount</div>
-                <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ff6b6b" }}>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Bill</div>
+                <div style={{ fontSize: "28px", fontWeight: "700", color: "#fff" }}>
                   ${bill}
                 </div>
               </div>
               
               <div style={{
-                padding: "15px",
-                backgroundColor: "white",
-                borderRadius: "12px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+                padding: "20px",
+                backgroundColor: "#0f1629",
+                borderRadius: "16px",
+                border: "1px solid rgba(64, 224, 208, 0.1)"
               }}>
-                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>Tip</div>
-                <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffa500" }}>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Tip</div>
+                <div style={{ fontSize: "28px", fontWeight: "700", color: "#40e0d0" }}>
                   ${tip}
                 </div>
               </div>
             </div>
 
             <div style={{
-              padding: "20px",
-              background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
-              borderRadius: "12px",
-              marginBottom: "15px",
+              padding: "28px",
+              background: "linear-gradient(135deg, #40e0d0 0%, #00c9ff 100%)",
+              borderRadius: "16px",
+              marginBottom: "20px",
               textAlign: "center",
-              color: "white"
+              color: "#0a0e27"
             }}>
-              <div style={{ fontSize: "14px", opacity: 0.9, marginBottom: "8px" }}>
-                Total to Pay
+              <div style={{ fontSize: "13px", opacity: 0.8, marginBottom: "10px", fontWeight: "600" }}>
+                Total Amount
               </div>
-              <div style={{ fontSize: "36px", fontWeight: "bold" }}>
+              <div style={{ fontSize: "48px", fontWeight: "bold" }}>
                 ${total}
               </div>
             </div>
 
             {avgPercent > 0 && (
               <div style={{
-                padding: "15px",
-                backgroundColor: "white",
-                borderRadius: "12px",
-                marginBottom: "15px",
+                padding: "20px",
+                backgroundColor: "rgba(64, 224, 208, 0.1)",
+                borderRadius: "16px",
+                marginBottom: "20px",
                 textAlign: "center",
-                border: "2px solid #feca57",
-                background: "#fffef0"
+                border: "1px solid rgba(64, 224, 208, 0.3)"
               }}>
-                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>
-                  💳 Split between 2 people
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>
+                  Per Person (Split)
                 </div>
-                <div style={{ fontSize: "32px", fontWeight: "bold", color: "#feca57" }}>
+                <div style={{ fontSize: "36px", fontWeight: "bold", color: "#40e0d0" }}>
                   ${perPerson.toFixed(2)}
                 </div>
               </div>
