@@ -186,36 +186,38 @@ function App() {
 
 function BillInput({ bill, handleBill }) {
   return (
-    <div style={{ marginBottom: "25px" }}>
+    <div style={{ marginBottom: "30px" }}>
       <label style={{ 
         display: "block", 
-        marginBottom: "10px", 
-        fontWeight: "600",
-        color: "#333",
-        fontSize: "17px"
+        marginBottom: "12px", 
+        fontWeight: "500",
+        color: "#8892b0",
+        fontSize: "15px"
       }}>
-        💵 How much was the bill?
+        How much was the bill?
       </label>
       <input 
         type="number" 
         value={bill} 
         onChange={(e) => handleBill(e)}
-        placeholder="Enter bill amount..."
+        placeholder="Enter amount..."
         style={{
-          padding: "14px 16px",
-          fontSize: "17px",
-          borderRadius: "10px",
-          border: "2px solid #e0e0e0",
+          padding: "16px 20px",
+          fontSize: "18px",
+          borderRadius: "12px",
+          border: "1px solid rgba(64, 224, 208, 0.2)",
+          backgroundColor: "#0f1629",
+          color: "#fff",
           width: "100%",
           transition: "all 0.3s",
           outline: "none"
         }}
         onFocus={(e) => {
-          e.target.style.borderColor = "#ffa500";
-          e.target.style.boxShadow = "0 0 0 3px rgba(255, 165, 0, 0.1)";
+          e.target.style.borderColor = "#40e0d0";
+          e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
         }}
         onBlur={(e) => {
-          e.target.style.borderColor = "#e0e0e0";
+          e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
           e.target.style.boxShadow = "none";
         }}
       />
