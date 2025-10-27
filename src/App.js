@@ -76,41 +76,95 @@ function App() {
         
         {bill > 0 && (
           <div style={{
-            marginTop: "30px",
-            padding: "20px",
-            backgroundColor: "#f8f9fa",
-            borderRadius: "10px",
-            border: "2px solid #e9ecef"
+            marginTop: "40px",
+            padding: "30px",
+            background: "linear-gradient(135deg, #ff6b6b15 0%, #ffa50015 100%)",
+            borderRadius: "16px",
+            border: "2px solid #ffa500",
+            boxShadow: "0 4px 15px rgba(255, 165, 0, 0.1)"
           }}>
-            <h2 style={{
-              color: "#667eea",
-              marginBottom: "15px",
-              fontSize: "24px",
-              textAlign: "center"
-            }}>
-              Total Amount
-            </h2>
             <div style={{
               textAlign: "center",
-              fontSize: "20px",
-              marginBottom: "10px",
-              color: "#333"
+              marginBottom: "20px"
             }}>
-              <div style={{ marginBottom: "8px" }}>
-                <span style={{ fontWeight: "bold" }}>Bill:</span> ${bill}
-              </div>
-              <div style={{ marginBottom: "8px" }}>
-                <span style={{ fontWeight: "bold" }}>Tip:</span> ${tip}
-              </div>
-              <div style={{
+              <h2 style={{
+                background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                marginBottom: "20px",
                 fontSize: "28px",
-                fontWeight: "bold",
-                color: "#667eea",
-                marginTop: "10px"
+                fontWeight: "bold"
               }}>
-                Total: ${total}
+                ✨ Your Bill Breakdown
+              </h2>
+            </div>
+            
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "15px",
+              marginBottom: "20px"
+            }}>
+              <div style={{
+                padding: "15px",
+                backgroundColor: "white",
+                borderRadius: "12px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+              }}>
+                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>Bill Amount</div>
+                <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ff6b6b" }}>
+                  ${bill}
+                </div>
+              </div>
+              
+              <div style={{
+                padding: "15px",
+                backgroundColor: "white",
+                borderRadius: "12px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+              }}>
+                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>Tip</div>
+                <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffa500" }}>
+                  ${tip}
+                </div>
               </div>
             </div>
+
+            <div style={{
+              padding: "20px",
+              background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
+              borderRadius: "12px",
+              marginBottom: "15px",
+              textAlign: "center",
+              color: "white"
+            }}>
+              <div style={{ fontSize: "14px", opacity: 0.9, marginBottom: "8px" }}>
+                Total to Pay
+              </div>
+              <div style={{ fontSize: "36px", fontWeight: "bold" }}>
+                ${total}
+              </div>
+            </div>
+
+            {avgPercent > 0 && (
+              <div style={{
+                padding: "15px",
+                backgroundColor: "white",
+                borderRadius: "12px",
+                marginBottom: "15px",
+                textAlign: "center",
+                border: "2px solid #feca57",
+                background: "#fffef0"
+              }}>
+                <div style={{ color: "#888", fontSize: "14px", marginBottom: "5px" }}>
+                  💳 Split between 2 people
+                </div>
+                <div style={{ fontSize: "32px", fontWeight: "bold", color: "#feca57" }}>
+                  ${perPerson.toFixed(2)}
+                </div>
+              </div>
+            )}
+            
             <Reset
               setPercent={setPercent}
               setBill={setBill}
@@ -125,32 +179,38 @@ function App() {
 
 function BillInput({ bill, handleBill }) {
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "25px" }}>
       <label style={{ 
         display: "block", 
-        marginBottom: "8px", 
+        marginBottom: "10px", 
         fontWeight: "600",
         color: "#333",
-        fontSize: "16px"
+        fontSize: "17px"
       }}>
-        💲 How much was the bill?
+        💵 How much was the bill?
       </label>
       <input 
         type="number" 
         value={bill} 
         onChange={(e) => handleBill(e)}
-        placeholder="Enter bill amount"
+        placeholder="Enter bill amount..."
         style={{
-          padding: "12px",
-          fontSize: "16px",
-          borderRadius: "8px",
+          padding: "14px 16px",
+          fontSize: "17px",
+          borderRadius: "10px",
           border: "2px solid #e0e0e0",
           width: "100%",
-          transition: "border 0.3s",
+          transition: "all 0.3s",
           outline: "none"
         }}
-        onFocus={(e) => e.target.style.borderColor = "#667eea"}
-        onBlur={(e) => e.target.style.borderColor = "#e0e0e0"}
+        onFocus={(e) => {
+          e.target.style.borderColor = "#ffa500";
+          e.target.style.boxShadow = "0 0 0 3px rgba(255, 165, 0, 0.1)";
+        }}
+        onBlur={(e) => {
+          e.target.style.borderColor = "#e0e0e0";
+          e.target.style.boxShadow = "none";
+        }}
       />
     </div>
   );
