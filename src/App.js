@@ -227,13 +227,13 @@ function BillInput({ bill, handleBill }) {
 
 function PercentageSelect({ placeholder, handlePercent, percent }) {
   return (
-    <div style={{ marginBottom: "25px" }}>
+    <div style={{ marginBottom: "30px" }}>
       <label style={{ 
         display: "block", 
-        marginBottom: "10px",
-        fontWeight: "600",
-        color: "#333",
-        fontSize: "17px"
+        marginBottom: "12px",
+        fontWeight: "500",
+        color: "#8892b0",
+        fontSize: "15px"
       }}>
         {placeholder}
       </label>
@@ -241,29 +241,30 @@ function PercentageSelect({ placeholder, handlePercent, percent }) {
         onChange={handlePercent} 
         value={percent}
         style={{
-          padding: "14px 16px",
-          fontSize: "17px",
-          borderRadius: "10px",
-          border: "2px solid #e0e0e0",
+          padding: "16px 20px",
+          fontSize: "18px",
+          borderRadius: "12px",
+          border: "1px solid rgba(64, 224, 208, 0.2)",
+          backgroundColor: "#0f1629",
+          color: "#fff",
           width: "100%",
-          backgroundColor: "white",
           cursor: "pointer",
           transition: "all 0.3s",
           outline: "none"
         }}
         onFocus={(e) => {
-          e.target.style.borderColor = "#ffa500";
-          e.target.style.boxShadow = "0 0 0 3px rgba(255, 165, 0, 0.1)";
+          e.target.style.borderColor = "#40e0d0";
+          e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
         }}
         onBlur={(e) => {
-          e.target.style.borderColor = "#e0e0e0";
+          e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
           e.target.style.boxShadow = "none";
         }}
       >
-        <option value={0}>Dissatisfied (0%)</option>
-        <option value={5}>It was okay (5%)</option>
-        <option value={10}>It was good (10%)</option>
-        <option value={20}>Absolutely amazing (20%)</option>
+        <option value={0} style={{ backgroundColor: "#0f1629", color: "#fff" }}>Dissatisfied (0%)</option>
+        <option value={5} style={{ backgroundColor: "#0f1629", color: "#fff" }}>It was okay (5%)</option>
+        <option value={10} style={{ backgroundColor: "#0f1629", color: "#fff" }}>It was good (10%)</option>
+        <option value={20} style={{ backgroundColor: "#0f1629", color: "#fff" }}>Absolutely amazing (20%)</option>
       </select>
     </div>
   );
@@ -278,28 +279,28 @@ function Reset({ setBill, setPercent, setPercentFriend }) {
         setPercentFriend(0);
       }}
       style={{
-        padding: "16px 32px",
+        padding: "18px 36px",
         fontSize: "17px",
-        background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
-        color: "white",
+        background: "linear-gradient(135deg, #40e0d0 0%, #00c9ff 100%)",
+        color: "#0a0e27",
         border: "none",
-        borderRadius: "10px",
+        borderRadius: "12px",
         cursor: "pointer",
         fontWeight: "600",
         width: "100%",
         transition: "all 0.3s",
-        boxShadow: "0 6px 20px rgba(255, 107, 107, 0.3)"
+        boxShadow: "0 4px 15px rgba(64, 224, 208, 0.4)"
       }}
       onMouseEnter={(e) => {
-        e.target.style.transform = "translateY(-3px) scale(1.02)";
-        e.target.style.boxShadow = "0 10px 30px rgba(255, 107, 107, 0.4)";
+        e.target.style.transform = "translateY(-2px)";
+        e.target.style.boxShadow = "0 8px 25px rgba(64, 224, 208, 0.5)";
       }}
       onMouseLeave={(e) => {
-        e.target.style.transform = "translateY(0) scale(1)";
-        e.target.style.boxShadow = "0 6px 20px rgba(255, 107, 107, 0.3)";
+        e.target.style.transform = "translateY(0)";
+        e.target.style.boxShadow = "0 4px 15px rgba(64, 224, 208, 0.4)";
       }}
     >
-      🔄 Calculate Again
+      Reset & Calculate
     </button>
   );
 }
