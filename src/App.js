@@ -25,7 +25,7 @@ function App() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #feca57 100%)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -34,21 +34,33 @@ function App() {
     }}>
       <div style={{
         backgroundColor: "white",
-        borderRadius: "20px",
-        padding: "40px",
-        boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
-        maxWidth: "500px",
-        width: "100%"
+        borderRadius: "24px",
+        padding: "50px",
+        boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+        maxWidth: "550px",
+        width: "100%",
+        animation: "fadeIn 0.5s ease-in"
       }}>
         <h1 style={{
           textAlign: "center",
-          color: "#333",
-          marginBottom: "30px",
-          fontSize: "32px",
-          fontWeight: "bold"
+          background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          marginBottom: "10px",
+          fontSize: "40px",
+          fontWeight: "bold",
+          fontFamily: "'Segoe UI', sans-serif"
         }}>
-          💵 Tip Calculator
+          💰 Splitting the Bill
         </h1>
+        <p style={{
+          textAlign: "center",
+          color: "#666",
+          marginBottom: "35px",
+          fontSize: "14px"
+        }}>
+          Calculate tips & split costs fairly
+        </p>
         
         <BillInput bill={bill} handleBill={handleBill} />
         <PercentageSelect
