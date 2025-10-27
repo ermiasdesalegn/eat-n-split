@@ -218,13 +218,13 @@ function BillInput({ bill, handleBill }) {
 
 function PercentageSelect({ placeholder, handlePercent, percent }) {
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "25px" }}>
       <label style={{ 
         display: "block", 
-        marginBottom: "8px",
+        marginBottom: "10px",
         fontWeight: "600",
         color: "#333",
-        fontSize: "16px"
+        fontSize: "17px"
       }}>
         {placeholder}
       </label>
@@ -232,18 +232,24 @@ function PercentageSelect({ placeholder, handlePercent, percent }) {
         onChange={handlePercent} 
         value={percent}
         style={{
-          padding: "12px",
-          fontSize: "16px",
-          borderRadius: "8px",
+          padding: "14px 16px",
+          fontSize: "17px",
+          borderRadius: "10px",
           border: "2px solid #e0e0e0",
           width: "100%",
           backgroundColor: "white",
           cursor: "pointer",
-          transition: "border 0.3s",
+          transition: "all 0.3s",
           outline: "none"
         }}
-        onFocus={(e) => e.target.style.borderColor = "#667eea"}
-        onBlur={(e) => e.target.style.borderColor = "#e0e0e0"}
+        onFocus={(e) => {
+          e.target.style.borderColor = "#ffa500";
+          e.target.style.boxShadow = "0 0 0 3px rgba(255, 165, 0, 0.1)";
+        }}
+        onBlur={(e) => {
+          e.target.style.borderColor = "#e0e0e0";
+          e.target.style.boxShadow = "none";
+        }}
       >
         <option value={0}>Dissatisfied (0%)</option>
         <option value={5}>It was okay (5%)</option>
@@ -263,28 +269,28 @@ function Reset({ setBill, setPercent, setPercentFriend }) {
         setPercentFriend(0);
       }}
       style={{
-        padding: "14px 28px",
-        fontSize: "16px",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        padding: "16px 32px",
+        fontSize: "17px",
+        background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
         color: "white",
         border: "none",
-        borderRadius: "8px",
+        borderRadius: "10px",
         cursor: "pointer",
         fontWeight: "600",
         width: "100%",
-        transition: "transform 0.2s, box-shadow 0.2s",
-        boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+        transition: "all 0.3s",
+        boxShadow: "0 6px 20px rgba(255, 107, 107, 0.3)"
       }}
       onMouseEnter={(e) => {
-        e.target.style.transform = "translateY(-2px)";
-        e.target.style.boxShadow = "0 6px 12px rgba(0,0,0,0.15)";
+        e.target.style.transform = "translateY(-3px) scale(1.02)";
+        e.target.style.boxShadow = "0 10px 30px rgba(255, 107, 107, 0.4)";
       }}
       onMouseLeave={(e) => {
-        e.target.style.transform = "translateY(0)";
-        e.target.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+        e.target.style.transform = "translateY(0) scale(1)";
+        e.target.style.boxShadow = "0 6px 20px rgba(255, 107, 107, 0.3)";
       }}
     >
-      🔄 Reset
+      🔄 Calculate Again
     </button>
   );
 }
