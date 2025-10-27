@@ -17,8 +17,10 @@ function App() {
     setBill(e.target.value ? Number(e.target.value) : "");
   }
 
+  const avgPercent = (percent + percentFriend) / 2;
   const tip = bill ? Math.round((0.01 * bill * percent + 0.01 * bill * percentFriend) / 2) : 0;
   const total = bill ? bill + tip : 0;
+  const perPerson = bill > 0 && avgPercent > 0 ? total / 2 : 0;
 
   return (
     <div style={{
