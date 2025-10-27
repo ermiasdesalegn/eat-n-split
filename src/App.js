@@ -25,41 +25,56 @@ function App() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #feca57 100%)",
+      background: "#0a0e27",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       padding: "20px",
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      position: "relative"
     }}>
       <div style={{
-        backgroundColor: "white",
-        borderRadius: "24px",
-        padding: "50px",
-        boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-        maxWidth: "550px",
+        backgroundColor: "#1a1f3a",
+        borderRadius: "32px",
+        padding: "60px 50px",
+        boxShadow: "0 0 100px rgba(64, 224, 208, 0.3)",
+        border: "1px solid rgba(64, 224, 208, 0.2)",
+        maxWidth: "600px",
         width: "100%",
-        animation: "fadeIn 0.5s ease-in"
+        position: "relative",
+        overflow: "hidden"
       }}>
+        <div style={{
+          position: "absolute",
+          top: "-50px",
+          right: "-50px",
+          width: "200px",
+          height: "200px",
+          borderRadius: "50%",
+          background: "linear-gradient(135deg, #40e0d0 0%, #00c9ff 100%)",
+          opacity: 0.1,
+          filter: "blur(80px)"
+        }}></div>
+        
         <h1 style={{
           textAlign: "center",
-          background: "linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          marginBottom: "10px",
-          fontSize: "40px",
+          color: "#40e0d0",
+          marginBottom: "8px",
+          fontSize: "42px",
           fontWeight: "bold",
-          fontFamily: "'Segoe UI', sans-serif"
+          fontFamily: "'Segoe UI', sans-serif",
+          letterSpacing: "-1px"
         }}>
-          💰 Splitting the Bill
+          Tip Calculator
         </h1>
         <p style={{
           textAlign: "center",
-          color: "#666",
-          marginBottom: "35px",
-          fontSize: "14px"
+          color: "#8892b0",
+          marginBottom: "40px",
+          fontSize: "15px",
+          fontWeight: "300"
         }}>
-          Calculate tips & split costs fairly
+          Calculate your tip & split evenly
         </p>
         
         <BillInput bill={bill} handleBill={handleBill} />
