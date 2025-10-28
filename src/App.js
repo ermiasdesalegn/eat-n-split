@@ -529,7 +529,7 @@ function CustomTipInput({ customTip, setCustomTip }) {
         color: "#8892b0",
         fontSize: "15px"
       }}>
-        Custom Tip Percentage
+        ✏️ Custom Tip Percentage
       </label>
       <input 
         type="number" 
