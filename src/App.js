@@ -370,13 +370,16 @@ function PercentageSelect({ placeholder, handlePercent, percent, disabled }) {
   );
 }
 
-function Reset({ setBill, setPercent, setPercentFriend }) {
+function Reset({ setBill, setPercent, setPercentFriend, setCustomTip, setUseCustom, setNumPeople }) {
   return (
     <button
       onClick={() => {
         setBill("");
         setPercent(0);
         setPercentFriend(0);
+        setCustomTip("");
+        setUseCustom(false);
+        setNumPeople(2);
       }}
       style={{
         padding: "18px 36px",
@@ -402,6 +405,207 @@ function Reset({ setBill, setPercent, setPercentFriend }) {
     >
       Reset & Calculate
     </button>
+  );
+}
+
+function QuickTipButtons({ percent, percentFriend, onQuickTip }) {
+  const tips = [10, 15, 18, 20];
+  
+  return (
+    <div style={{ marginBottom: "30px" }}>
+      <label style={{ 
+        display: "block", 
+        marginBottom: "12px",
+        fontWeight: "500",
+        color: "#8892b0",
+        fontSize: "15px"
+      }}>
+        Quick Tip
+      </label>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: "10px"
+      }}>
+        {tips.map(tip => (
+          <button
+            key={tip}
+            onClick={() => onQuickTip(tip)}
+            style={{
+              padding: "14px",
+              fontSize: "16px",
+              borderRadius: "12px",
+              border: percent === tip && percentFriend === tip 
+                ? "2px solid #40e0d0" 
+                : "1px solid rgba(64, 224, 208, 0.2)",
+              backgroundColor: percent === tip && percentFriend === tip
+                ? "rgba(64, 224, 208, 0.15)"
+                : "#0f1629",
+              color: "#fff",
+              cursor: "pointer",
+              fontWeight: "600",
+              transition: "all 0.3s"
+            }}
+            onMouseEnter={(e) => {
+              if (percent !== tip || percentFriend !== tip) {
+                e.target.style.borderColor = "#40e0d0";
+                e.target.style.backgroundColor = "rgba(64, 224, 208, 0.1)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (percent !== tip || percentFriend !== tip) {
+                e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+                e.target.style.backgroundColor = "#0f1629";
+              }
+            }}
+          >
+            {tip}%
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CustomTipInput({ customTip, setCustomTip }) {
+  return (
+    <div style={{ marginBottom: "30px" }}>
+      <label style={{ 
+        display: "block", 
+        marginBottom: "12px", 
+        fontWeight: "500",
+        color: "#8892b0",
+        fontSize: "15px"
+      }}>
+        Custom Tip Percentage
+      </label>
+      <input 
+        type="number" 
+        value={customTip} 
+        onChange={(e) => setCustomTip(e.target.value)}
+        placeholder="Enter tip % (e.g., 15)"
+        min="0"
+        max="100"
+        step="0.1"
+        style={{
+          padding: "16px 20px",
+          fontSize: "18px",
+          borderRadius: "12px",
+          border: "1px solid rgba(64, 224, 208, 0.2)",
+          backgroundColor: "#0f1629",
+          color: "#fff",
+          width: "100%",
+          transition: "all 0.3s",
+          outline: "none"
+        }}
+        onFocus={(e) => {
+          e.target.style.borderColor = "#40e0d0";
+          e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
+        }}
+        onBlur={(e) => {
+          e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+          e.target.style.boxShadow = "none";
+        }}
+      />
+    </div>
+  );
+}
+
+function PeopleSelector({ numPeople, setNumPeople }) {
+  return (
+    <div style={{ marginBottom: "30px" }}>
+      <label style={{ 
+        display: "block", 
+        marginBottom: "12px",
+        fontWeight: "500",
+        color: "#8892b0",
+        fontSize: "15px"
+      }}>
+        How many people?
+      </label>
+      <div style={{
+        display: "flex",
+        gap: "10px",
+        alignItems: "center"
+      }}>
+        <button
+          onClick={() => setNumPeople(Math.max(1, numPeople - 1))}
+          style={{
+            padding: "12px 20px",
+            fontSize: "20px",
+            borderRadius: "12px",
+            border: "1px solid rgba(64, 224, 208, 0.2)",
+            backgroundColor: "#0f1629",
+            color: "#fff",
+            cursor: "pointer",
+            fontWeight: "bold",
+            transition: "all 0.3s"
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.borderColor = "#40e0d0";
+            e.target.style.backgroundColor = "rgba(64, 224, 208, 0.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+            e.target.style.backgroundColor = "#0f1629";
+          }}
+        >
+          −
+        </button>
+        
+        <input
+          type="number"
+          value={numPeople}
+          onChange={(e) => setNumPeople(Number(e.target.value) || 1)}
+          min="1"
+          max="20"
+          style={{
+            flex: 1,
+            padding: "16px 20px",
+            fontSize: "18px",
+            textAlign: "center",
+            borderRadius: "12px",
+            border: "1px solid rgba(64, 224, 208, 0.2)",
+            backgroundColor: "#0f1629",
+            color: "#fff",
+            outline: "none"
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = "#40e0d0";
+            e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+            e.target.style.boxShadow = "none";
+          }}
+        />
+        
+        <button
+          onClick={() => setNumPeople(Math.min(20, numPeople + 1))}
+          style={{
+            padding: "12px 20px",
+            fontSize: "20px",
+            borderRadius: "12px",
+            border: "1px solid rgba(64, 224, 208, 0.2)",
+            backgroundColor: "#0f1629",
+            color: "#fff",
+            cursor: "pointer",
+            fontWeight: "bold",
+            transition: "all 0.3s"
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.borderColor = "#40e0d0";
+            e.target.style.backgroundColor = "rgba(64, 224, 208, 0.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+            e.target.style.backgroundColor = "#0f1629";
+          }}
+        >
+          +
+        </button>
+      </div>
+    </div>
   );
 }
 
