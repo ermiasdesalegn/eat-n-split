@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [bill, setBill] = useState("");
@@ -7,6 +7,7 @@ function App() {
   const [numPeople, setNumPeople] = useState(2);
   const [customTip, setCustomTip] = useState("");
   const [useCustom, setUseCustom] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function handlePercent(e) {
     setPercent(Number(e.target.value));
@@ -31,6 +32,13 @@ function App() {
   const tip = bill ? Math.round((0.01 * bill * avgPercent) * 100) / 100 : 0;
   const total = bill ? bill + tip : 0;
   const perPerson = bill > 0 && avgPercent > 0 && numPeople > 0 ? total / numPeople : 0;
+
+  function copyToClipboard() {
+    const text = `Bill: $${bill}\nTip: $${tip.toFixed(2)} (${avgPercent.toFixed(1)}%)\nTotal: $${total.toFixed(2)}\nPer Person: $${perPerson.toFixed(2)}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   return (
     <div style={{
@@ -66,17 +74,20 @@ function App() {
           filter: "blur(80px)"
         }}></div>
         
-        <h1 style={{
-          textAlign: "center",
-          color: "#40e0d0",
-          marginBottom: "8px",
-          fontSize: "42px",
-          fontWeight: "bold",
-          fontFamily: "'Segoe UI', sans-serif",
-          letterSpacing: "-1px"
-        }}>
-          Tip Calculator
-        </h1>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "8px" }}>
+          <span style={{ fontSize: "48px" }}>💰</span>
+          <h1 style={{
+            textAlign: "center",
+            color: "#40e0d0",
+            fontSize: "42px",
+            fontWeight: "bold",
+            fontFamily: "'Segoe UI', sans-serif",
+            letterSpacing: "-1px",
+            margin: 0
+          }}>
+            Tip Calculator
+          </h1>
+        </div>
         <p style={{
           textAlign: "center",
           color: "#8892b0",
@@ -84,7 +95,7 @@ function App() {
           fontSize: "15px",
           fontWeight: "300"
         }}>
-          Calculate your tip & split evenly
+          Calculate your tip & split evenly 💸
         </p>
         
         <BillInput bill={bill} handleBill={handleBill} />
@@ -121,7 +132,7 @@ function App() {
               transition: "all 0.3s"
             }}
           >
-            Split Opinion
+            <span>👥</span> Split Opinion
           </button>
           <button
             onClick={() => setUseCustom(true)}
@@ -137,7 +148,7 @@ function App() {
               transition: "all 0.3s"
             }}
           >
-            Custom Tip
+            <span>✏️</span> Custom Tip
           </button>
         </div>
 
@@ -174,17 +185,55 @@ function App() {
             padding: "35px",
             background: "rgba(26, 31, 58, 0.5)",
             borderRadius: "20px",
-            border: "1px solid rgba(64, 224, 208, 0.2)"
+            border: "1px solid rgba(64, 224, 208, 0.2)",
+            animation: "fadeIn 0.5s ease-in"
           }}>
-            <h2 style={{
-              color: "#40e0d0",
-              marginBottom: "25px",
-              fontSize: "22px",
-              fontWeight: "600",
-              textAlign: "center"
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "25px"
             }}>
-              Breakdown
-            </h2>
+              <h2 style={{
+                color: "#40e0d0",
+                fontSize: "22px",
+                fontWeight: "600",
+                margin: 0
+              }}>
+                📊 Breakdown
+              </h2>
+              <button
+                onClick={copyToClipboard}
+                style={{
+                  padding: "10px 20px",
+                  fontSize: "14px",
+                  background: copied ? "rgba(64, 224, 208, 0.2)" : "transparent",
+                  color: copied ? "#40e0d0" : "#8892b0",
+                  border: "1px solid rgba(64, 224, 208, 0.3)",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                  transition: "all 0.3s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px"
+                }}
+                onMouseEnter={(e) => {
+                  if (!copied) {
+                    e.target.style.borderColor = "#40e0d0";
+                    e.target.style.color = "#40e0d0";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!copied) {
+                    e.target.style.borderColor = "rgba(64, 224, 208, 0.3)";
+                    e.target.style.color = "#8892b0";
+                  }
+                }}
+              >
+                {copied ? "✓ Copied!" : "📋 Copy"}
+              </button>
+            </div>
             
             <div style={{
               display: "grid",
@@ -196,9 +245,10 @@ function App() {
                 padding: "20px",
                 backgroundColor: "#0f1629",
                 borderRadius: "16px",
-                border: "1px solid rgba(64, 224, 208, 0.1)"
+                border: "1px solid rgba(64, 224, 208, 0.1)",
+                transition: "all 0.3s"
               }}>
-                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Bill</div>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>💵 Bill</div>
                 <div style={{ fontSize: "28px", fontWeight: "700", color: "#fff" }}>
                   ${bill}
                 </div>
@@ -208,9 +258,10 @@ function App() {
                 padding: "20px",
                 backgroundColor: "#0f1629",
                 borderRadius: "16px",
-                border: "1px solid rgba(64, 224, 208, 0.1)"
+                border: "1px solid rgba(64, 224, 208, 0.1)",
+                transition: "all 0.3s"
               }}>
-                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Tip ({avgPercent.toFixed(1)}%)</div>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>💰 Tip ({avgPercent.toFixed(1)}%)</div>
                 <div style={{ fontSize: "28px", fontWeight: "700", color: "#40e0d0" }}>
                   ${tip.toFixed(2)}
                 </div>
@@ -220,9 +271,10 @@ function App() {
                 padding: "20px",
                 backgroundColor: "#0f1629",
                 borderRadius: "16px",
-                border: "1px solid rgba(64, 224, 208, 0.1)"
+                border: "1px solid rgba(64, 224, 208, 0.1)",
+                transition: "all 0.3s"
               }}>
-                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>People</div>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>👥 People</div>
                 <div style={{ fontSize: "28px", fontWeight: "700", color: "#40e0d0" }}>
                   {numPeople}
                 </div>
@@ -255,7 +307,7 @@ function App() {
                 border: "1px solid rgba(64, 224, 208, 0.3)"
               }}>
                 <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>
-                  Per Person (Split)
+                  🎯 Per Person (Split)
                 </div>
                 <div style={{ fontSize: "36px", fontWeight: "bold", color: "#40e0d0" }}>
                   ${perPerson.toFixed(2)}
@@ -288,7 +340,7 @@ function BillInput({ bill, handleBill }) {
         color: "#8892b0",
         fontSize: "15px"
       }}>
-        How much was the bill?
+        💳 How much was the bill?
       </label>
       <input 
         type="number" 
@@ -402,9 +454,9 @@ function Reset({ setBill, setPercent, setPercentFriend, setCustomTip, setUseCust
         e.target.style.transform = "translateY(0)";
         e.target.style.boxShadow = "0 4px 15px rgba(64, 224, 208, 0.4)";
       }}
-    >
-      Reset & Calculate
-    </button>
+      >
+        🔄 Reset & Calculate
+      </button>
   );
 }
 
@@ -420,7 +472,7 @@ function QuickTipButtons({ percent, percentFriend, onQuickTip }) {
         color: "#8892b0",
         fontSize: "15px"
       }}>
-        Quick Tip
+        ⚡ Quick Tip
       </label>
       <div style={{
         display: "grid",
