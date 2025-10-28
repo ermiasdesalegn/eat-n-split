@@ -573,7 +573,7 @@ function PeopleSelector({ numPeople, setNumPeople }) {
         color: "#8892b0",
         fontSize: "15px"
       }}>
-        How many people?
+        👥 How many people?
       </label>
       <div style={{
         display: "flex",
