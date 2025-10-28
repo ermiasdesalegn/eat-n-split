@@ -4,6 +4,9 @@ function App() {
   const [bill, setBill] = useState("");
   const [percent, setPercent] = useState(0);
   const [percentFriend, setPercentFriend] = useState(0);
+  const [numPeople, setNumPeople] = useState(2);
+  const [customTip, setCustomTip] = useState("");
+  const [useCustom, setUseCustom] = useState(false);
 
   function handlePercent(e) {
     setPercent(Number(e.target.value));
@@ -17,10 +20,17 @@ function App() {
     setBill(e.target.value ? Number(e.target.value) : "");
   }
 
-  const avgPercent = (percent + percentFriend) / 2;
-  const tip = bill ? Math.round((0.01 * bill * percent + 0.01 * bill * percentFriend) / 2) : 0;
+  function handleQuickTip(value) {
+    setCustomTip("");
+    setUseCustom(false);
+    setPercent(value);
+    setPercentFriend(value);
+  }
+
+  const avgPercent = useCustom ? (customTip ? Number(customTip) : 0) : (percent + percentFriend) / 2;
+  const tip = bill ? Math.round((0.01 * bill * avgPercent) * 100) / 100 : 0;
   const total = bill ? bill + tip : 0;
-  const perPerson = bill > 0 && avgPercent > 0 ? total / 2 : 0;
+  const perPerson = bill > 0 && avgPercent > 0 && numPeople > 0 ? total / numPeople : 0;
 
   return (
     <div style={{
@@ -78,15 +88,84 @@ function App() {
         </p>
         
         <BillInput bill={bill} handleBill={handleBill} />
-        <PercentageSelect
-          placeholder="How did you like the service? "
-          percent={percent}
-          handlePercent={handlePercent}
-        />
-        <PercentageSelect
-          placeholder="How did your friend like the service? "
-          handlePercent={handlePercentFriend}
-          percent={percentFriend}
+        
+        {/* Quick Tip Buttons */}
+        {!useCustom && (
+          <QuickTipButtons
+            percent={percent}
+            percentFriend={percentFriend}
+            onQuickTip={handleQuickTip}
+          />
+        )}
+        
+        {/* Mode Toggle */}
+        <div style={{
+          marginBottom: "30px",
+          display: "flex",
+          gap: "12px",
+          padding: "8px",
+          background: "rgba(15, 22, 41, 0.5)",
+          borderRadius: "12px"
+        }}>
+          <button
+            onClick={() => setUseCustom(false)}
+            style={{
+              flex: 1,
+              padding: "12px",
+              background: useCustom ? "transparent" : "linear-gradient(135deg, #40e0d0 0%, #00c9ff 100%)",
+              color: useCustom ? "#8892b0" : "#0a0e27",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.3s"
+            }}
+          >
+            Split Opinion
+          </button>
+          <button
+            onClick={() => setUseCustom(true)}
+            style={{
+              flex: 1,
+              padding: "12px",
+              background: !useCustom ? "transparent" : "linear-gradient(135deg, #40e0d0 0%, #00c9ff 100%)",
+              color: !useCustom ? "#8892b0" : "#0a0e27",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.3s"
+            }}
+          >
+            Custom Tip
+          </button>
+        </div>
+
+        {useCustom ? (
+          <CustomTipInput
+            customTip={customTip}
+            setCustomTip={setCustomTip}
+          />
+        ) : (
+          <>
+            <PercentageSelect
+              placeholder="How did you like the service? "
+              percent={percent}
+              handlePercent={handlePercent}
+              disabled={useCustom}
+            />
+            <PercentageSelect
+              placeholder="How did your friend like the service? "
+              handlePercent={handlePercentFriend}
+              percent={percentFriend}
+              disabled={useCustom}
+            />
+          </>
+        )}
+        
+        <PeopleSelector
+          numPeople={numPeople}
+          setNumPeople={setNumPeople}
         />
         
         {bill > 0 && (
@@ -109,7 +188,7 @@ function App() {
             
             <div style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: "1fr 1fr 1fr",
               gap: "18px",
               marginBottom: "25px"
             }}>
@@ -131,9 +210,21 @@ function App() {
                 borderRadius: "16px",
                 border: "1px solid rgba(64, 224, 208, 0.1)"
               }}>
-                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Tip</div>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>Tip ({avgPercent.toFixed(1)}%)</div>
                 <div style={{ fontSize: "28px", fontWeight: "700", color: "#40e0d0" }}>
-                  ${tip}
+                  ${tip.toFixed(2)}
+                </div>
+              </div>
+              
+              <div style={{
+                padding: "20px",
+                backgroundColor: "#0f1629",
+                borderRadius: "16px",
+                border: "1px solid rgba(64, 224, 208, 0.1)"
+              }}>
+                <div style={{ color: "#8892b0", fontSize: "13px", marginBottom: "8px", fontWeight: "400" }}>People</div>
+                <div style={{ fontSize: "28px", fontWeight: "700", color: "#40e0d0" }}>
+                  {numPeople}
                 </div>
               </div>
             </div>
@@ -176,6 +267,9 @@ function App() {
               setPercent={setPercent}
               setBill={setBill}
               setPercentFriend={setPercentFriend}
+              setCustomTip={setCustomTip}
+              setUseCustom={setUseCustom}
+              setNumPeople={setNumPeople}
             />
           </div>
         )}
