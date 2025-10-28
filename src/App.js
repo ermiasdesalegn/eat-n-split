@@ -319,7 +319,7 @@ function BillInput({ bill, handleBill }) {
   );
 }
 
-function PercentageSelect({ placeholder, handlePercent, percent }) {
+function PercentageSelect({ placeholder, handlePercent, percent, disabled }) {
   return (
     <div style={{ marginBottom: "30px" }}>
       <label style={{ 
@@ -334,6 +334,7 @@ function PercentageSelect({ placeholder, handlePercent, percent }) {
       <select
         onChange={handlePercent} 
         value={percent}
+        disabled={disabled}
         style={{
           padding: "16px 20px",
           fontSize: "18px",
@@ -342,17 +343,22 @@ function PercentageSelect({ placeholder, handlePercent, percent }) {
           backgroundColor: "#0f1629",
           color: "#fff",
           width: "100%",
-          cursor: "pointer",
+          cursor: disabled ? "not-allowed" : "pointer",
           transition: "all 0.3s",
-          outline: "none"
+          outline: "none",
+          opacity: disabled ? 0.5 : 1
         }}
         onFocus={(e) => {
-          e.target.style.borderColor = "#40e0d0";
-          e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
+          if (!disabled) {
+            e.target.style.borderColor = "#40e0d0";
+            e.target.style.boxShadow = "0 0 0 4px rgba(64, 224, 208, 0.1)";
+          }
         }}
         onBlur={(e) => {
-          e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
-          e.target.style.boxShadow = "none";
+          if (!disabled) {
+            e.target.style.borderColor = "rgba(64, 224, 208, 0.2)";
+            e.target.style.boxShadow = "none";
+          }
         }}
       >
         <option value={0} style={{ backgroundColor: "#0f1629", color: "#fff" }}>Dissatisfied (0%)</option>
