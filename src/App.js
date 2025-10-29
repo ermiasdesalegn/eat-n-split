@@ -15,25 +15,30 @@ function App() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#fafafa",
+      backgroundColor: "#f5f5f5",
       padding: "20px",
       fontFamily: "system-ui, sans-serif"
     }}>
       <div style={{
         width: "100%",
-        maxWidth: "400px"
+        maxWidth: "420px",
+        backgroundColor: "#fff",
+        padding: "40px",
+        borderRadius: "12px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
       }}>
         <h1 style={{
-          fontSize: "32px",
-          fontWeight: "300",
-          marginBottom: "48px",
-          color: "#333",
-          textAlign: "center"
+          fontSize: "28px",
+          fontWeight: "400",
+          marginBottom: "40px",
+          color: "#1a1a1a",
+          textAlign: "center",
+          letterSpacing: "-0.5px"
         }}>
           Tip Calculator
         </h1>
 
-        <div style={{ marginBottom: "32px" }}>
+        <div style={{ marginBottom: "28px" }}>
           <input
             type="number"
             value={bill}
@@ -41,23 +46,31 @@ function App() {
             placeholder="Bill amount"
             style={{
               width: "100%",
-              padding: "16px",
-              fontSize: "18px",
+              padding: "14px 0",
+              fontSize: "16px",
               border: "none",
-              borderBottom: "1px solid #ddd",
+              borderBottom: "2px solid #e0e0e0",
               backgroundColor: "transparent",
               outline: "none",
-              color: "#333"
+              color: "#1a1a1a",
+              transition: "border-color 0.2s"
+            }}
+            onFocus={(e) => {
+              e.target.style.borderBottomColor = "#4a90e2";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderBottomColor = "#e0e0e0";
             }}
           />
         </div>
 
-        <div style={{ marginBottom: "32px" }}>
+        <div style={{ marginBottom: "28px" }}>
           <label style={{
             display: "block",
-            fontSize: "14px",
+            fontSize: "13px",
             color: "#666",
-            marginBottom: "8px"
+            marginBottom: "10px",
+            fontWeight: "500"
           }}>
             Tip
           </label>
@@ -67,23 +80,31 @@ function App() {
             onChange={(e) => setTip(Number(e.target.value) || 0)}
             style={{
               width: "100%",
-              padding: "16px",
-              fontSize: "18px",
+              padding: "14px 0",
+              fontSize: "16px",
               border: "none",
-              borderBottom: "1px solid #ddd",
+              borderBottom: "2px solid #e0e0e0",
               backgroundColor: "transparent",
               outline: "none",
-              color: "#333"
+              color: "#1a1a1a",
+              transition: "border-color 0.2s"
+            }}
+            onFocus={(e) => {
+              e.target.style.borderBottomColor = "#4a90e2";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderBottomColor = "#e0e0e0";
             }}
           />
         </div>
 
-        <div style={{ marginBottom: "48px" }}>
+        <div style={{ marginBottom: "40px" }}>
           <label style={{
             display: "block",
-            fontSize: "14px",
+            fontSize: "13px",
             color: "#666",
-            marginBottom: "8px"
+            marginBottom: "10px",
+            fontWeight: "500"
           }}>
             People
           </label>
@@ -94,13 +115,20 @@ function App() {
             min="1"
             style={{
               width: "100%",
-              padding: "16px",
-              fontSize: "18px",
+              padding: "14px 0",
+              fontSize: "16px",
               border: "none",
-              borderBottom: "1px solid #ddd",
+              borderBottom: "2px solid #e0e0e0",
               backgroundColor: "transparent",
               outline: "none",
-              color: "#333"
+              color: "#1a1a1a",
+              transition: "border-color 0.2s"
+            }}
+            onFocus={(e) => {
+              e.target.style.borderBottomColor = "#4a90e2";
+            }}
+            onBlur={(e) => {
+              e.target.style.borderBottomColor = "#e0e0e0";
             }}
           />
         </div>
@@ -108,40 +136,56 @@ function App() {
         {bill > 0 && (
           <div style={{
             paddingTop: "32px",
-            borderTop: "1px solid #eee"
+            borderTop: "2px solid #f0f0f0",
+            marginTop: "8px"
           }}>
             <div style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "16px",
-              fontSize: "16px",
+              alignItems: "center",
+              marginBottom: "20px",
+              fontSize: "15px",
               color: "#666"
             }}>
               <span>Tip</span>
-              <span style={{ color: "#333" }}>${tipAmount.toFixed(2)}</span>
+              <span style={{ 
+                color: "#1a1a1a",
+                fontWeight: "500"
+              }}>${tipAmount.toFixed(2)}</span>
             </div>
             <div style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "24px",
-              fontSize: "20px",
-              fontWeight: "500",
-              color: "#333"
+              alignItems: "center",
+              marginBottom: people > 1 ? "24px" : "0",
+              fontSize: "22px",
+              fontWeight: "600",
+              color: "#1a1a1a",
+              paddingTop: "20px",
+              borderTop: "2px solid #f0f0f0"
             }}>
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span style={{ 
+                color: "#4a90e2",
+                fontSize: "24px"
+              }}>${total.toFixed(2)}</span>
             </div>
             {people > 1 && (
               <div style={{
                 display: "flex",
                 justifyContent: "space-between",
-                fontSize: "16px",
+                alignItems: "center",
+                fontSize: "15px",
                 color: "#666",
-                paddingTop: "16px",
-                borderTop: "1px solid #eee"
+                paddingTop: "20px",
+                borderTop: "2px solid #f0f0f0",
+                marginTop: "20px"
               }}>
                 <span>Per person</span>
-                <span style={{ color: "#333" }}>${perPerson.toFixed(2)}</span>
+                <span style={{ 
+                  color: "#1a1a1a",
+                  fontWeight: "500"
+                }}>${perPerson.toFixed(2)}</span>
               </div>
             )}
           </div>
