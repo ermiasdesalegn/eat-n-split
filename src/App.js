@@ -17,9 +17,9 @@ function App() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#f8f9fa",
-      padding: "40px 20px",
-      fontFamily: "system-ui, -apple-system, sans-serif"
+      backgroundColor: "#f5f5f5",
+      padding: "20px",
+      fontFamily: "system-ui, sans-serif"
     }}>
       <div style={{
         width: "100%",
