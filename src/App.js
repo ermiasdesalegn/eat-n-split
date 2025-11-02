@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [bill, setBill] = useState("");
   const [tip, setTip] = useState(15);
   const [people, setPeople] = useState(1);
+  const [copied, setCopied] = useState(false);
+
+  // Load preferences from localStorage
+  useEffect(() => {
+    const savedTip = localStorage.getItem('tipPercentage');
+    if (savedTip) setTip(Number(savedTip));
+  }, []);
+
+  // Save tip preference
+  useEffect(() => {
+    if (tip > 0) {
+      localStorage.setItem('tipPercentage', tip.toString());
+    }
+  }, [tip]);
 
   const tipAmount = bill ? (bill * tip / 100) : 0;
   const total = bill ? parseFloat(bill) + tipAmount : 0;
@@ -11,15 +25,39 @@ function App() {
 
   const quickTips = [10, 15, 18, 20, 25];
 
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
+  }
+
+  function copyToClipboard() {
+    const text = `Tip Calculator Summary\n\nBill: ${formatCurrency(bill)}\nTip (${tip}%): ${formatCurrency(tipAmount)}\nTotal: ${formatCurrency(total)}${people > 1 ? `\nPer Person (${people} people): ${formatCurrency(perPerson)}` : ''}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  function incrementPeople() {
+    setPeople(prev => Math.min(20, prev + 1));
+  }
+
+  function decrementPeople() {
+    setPeople(prev => Math.max(1, prev - 1));
+  }
+
   return (
     <div style={{
       minHeight: "100vh",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#f5f5f5",
-      padding: "20px",
-      fontFamily: "system-ui, sans-serif"
+      background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      padding: "40px 20px",
+      fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
     }}>
       <div style={{
         width: "100%",
@@ -196,45 +234,122 @@ function App() {
               Number of People
             </label>
             <div style={{
-              position: "relative",
               display: "flex",
+              gap: "12px",
               alignItems: "center"
             }}>
-              <span style={{
-                position: "absolute",
-                left: "16px",
-                fontSize: "18px",
-                color: "#666"
-              }}>👥</span>
-              <input
-                type="number"
-                value={people}
-                onChange={(e) => setPeople(Math.max(1, Number(e.target.value) || 1))}
-                min="1"
-                placeholder="1"
+              <button
+                onClick={decrementPeople}
+                disabled={people <= 1}
                 style={{
-                  width: "100%",
-                  padding: "16px 16px 16px 44px",
-                  fontSize: "18px",
+                  width: "48px",
+                  height: "48px",
+                  fontSize: "24px",
+                  fontWeight: "600",
                   border: "2px solid #e1e5e9",
                   borderRadius: "12px",
-                  backgroundColor: "#fafbfc",
-                  outline: "none",
-                  color: "#1a1a1a",
+                  backgroundColor: people <= 1 ? "#f5f5f5" : "#fafbfc",
+                  color: people <= 1 ? "#ccc" : "#333",
+                  cursor: people <= 1 ? "not-allowed" : "pointer",
                   transition: "all 0.2s",
-                  fontWeight: "500"
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0
                 }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#4a90e2";
-                  e.target.style.backgroundColor = "#fff";
-                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                onMouseEnter={(e) => {
+                  if (people > 1) {
+                    e.target.style.borderColor = "#4a90e2";
+                    e.target.style.backgroundColor = "#e8f2ff";
+                  }
                 }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "#e1e5e9";
-                  e.target.style.backgroundColor = "#fafbfc";
-                  e.target.style.boxShadow = "none";
+                onMouseLeave={(e) => {
+                  if (people > 1) {
+                    e.target.style.borderColor = "#e1e5e9";
+                    e.target.style.backgroundColor = "#fafbfc";
+                  }
                 }}
-              />
+              >
+                −
+              </button>
+              <div style={{
+                position: "relative",
+                flex: 1
+              }}>
+                <span style={{
+                  position: "absolute",
+                  left: "16px",
+                  fontSize: "18px",
+                  color: "#666",
+                  top: "50%",
+                  transform: "translateY(-50%)"
+                }}>👥</span>
+                <input
+                  type="number"
+                  value={people}
+                  onChange={(e) => setPeople(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+                  min="1"
+                  max="20"
+                  placeholder="1"
+                  style={{
+                    width: "100%",
+                    padding: "16px 16px 16px 44px",
+                    fontSize: "18px",
+                    border: "2px solid #e1e5e9",
+                    borderRadius: "12px",
+                    backgroundColor: "#fafbfc",
+                    outline: "none",
+                    color: "#1a1a1a",
+                    transition: "all 0.2s",
+                    fontWeight: "500",
+                    textAlign: "center"
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "#4a90e2";
+                    e.target.style.backgroundColor = "#fff";
+                    e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "#e1e5e9";
+                    e.target.style.backgroundColor = "#fafbfc";
+                    e.target.style.boxShadow = "none";
+                  }}
+                />
+              </div>
+              <button
+                onClick={incrementPeople}
+                disabled={people >= 20}
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  fontSize: "24px",
+                  fontWeight: "600",
+                  border: "2px solid #e1e5e9",
+                  borderRadius: "12px",
+                  backgroundColor: people >= 20 ? "#f5f5f5" : "#fafbfc",
+                  color: people >= 20 ? "#ccc" : "#333",
+                  cursor: people >= 20 ? "not-allowed" : "pointer",
+                  transition: "all 0.2s",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  if (people < 20) {
+                    e.target.style.borderColor = "#4a90e2";
+                    e.target.style.backgroundColor = "#e8f2ff";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (people < 20) {
+                    e.target.style.borderColor = "#e1e5e9";
+                    e.target.style.backgroundColor = "#fafbfc";
+                  }
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
         </div>
@@ -249,14 +364,54 @@ function App() {
           justifyContent: "space-between"
         }}>
           <div>
-            <h2 style={{
-              fontSize: "24px",
-              fontWeight: "600",
-              marginBottom: "40px",
-              color: "#fff"
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "40px"
             }}>
-              Summary
-            </h2>
+              <h2 style={{
+                fontSize: "24px",
+                fontWeight: "600",
+                margin: 0,
+                color: "#fff"
+              }}>
+                Summary
+              </h2>
+              {bill > 0 && (
+                <button
+                  onClick={copyToClipboard}
+                  style={{
+                    padding: "10px 16px",
+                    fontSize: "13px",
+                    fontWeight: "600",
+                    backgroundColor: copied ? "#4a90e2" : "rgba(255,255,255,0.1)",
+                    color: copied ? "#fff" : "#94a3b8",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!copied) {
+                      e.target.style.backgroundColor = "rgba(255,255,255,0.15)";
+                      e.target.style.color = "#fff";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!copied) {
+                      e.target.style.backgroundColor = "rgba(255,255,255,0.1)";
+                      e.target.style.color = "#94a3b8";
+                    }
+                  }}
+                >
+                  {copied ? "✓ Copied!" : "📋 Copy"}
+                </button>
+              )}
+            </div>
 
             {bill > 0 ? (
               <>
@@ -282,7 +437,7 @@ function App() {
                         fontWeight: "600",
                         color: "#fff"
                       }}>
-                        ${parseFloat(bill).toFixed(2)}
+                        {formatCurrency(parseFloat(bill))}
                       </div>
                     </div>
                   </div>
@@ -308,7 +463,7 @@ function App() {
                         fontWeight: "600",
                         color: "#4a90e2"
                       }}>
-                        ${tipAmount.toFixed(2)}
+                        {formatCurrency(tipAmount)}
                       </div>
                     </div>
                   </div>
@@ -332,7 +487,7 @@ function App() {
                         fontWeight: "700",
                         color: "#fff"
                       }}>
-                        ${total.toFixed(2)}
+                        {formatCurrency(total)}
                       </div>
                     </div>
                   </div>
@@ -355,7 +510,7 @@ function App() {
                         fontWeight: "600",
                         color: "#4a90e2"
                       }}>
-                        ${perPerson.toFixed(2)}
+                        {formatCurrency(perPerson)}
                       </div>
                     </div>
                   )}
