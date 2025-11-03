@@ -206,7 +206,7 @@ function App() {
               type="number"
               value={tip}
               onChange={(e) => setTip(Number(e.target.value) || 0)}
-              placeholder="Custom"
+              placeholder="Enter custom %"
               style={{
                 width: "100%",
                 padding: "14px 16px",
