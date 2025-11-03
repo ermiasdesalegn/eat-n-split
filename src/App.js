@@ -99,7 +99,7 @@ function App() {
             color: "#666",
             marginBottom: "40px"
           }}>
-            Enter your bill details below
+            Calculate tip and split the bill
           </p>
 
           <div style={{ marginBottom: "32px" }}>
