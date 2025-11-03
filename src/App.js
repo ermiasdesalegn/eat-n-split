@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [bill, setBill] = useState("");
@@ -166,8 +166,8 @@ function App() {
             </label>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "12px",
+              gridTemplateColumns: "repeat(5, 1fr)",
+              gap: "10px",
               marginBottom: "12px"
             }}>
               {quickTips.map(tipPercent => (
