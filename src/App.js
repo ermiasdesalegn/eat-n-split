@@ -175,8 +175,8 @@ function App() {
                   key={tipPercent}
                   onClick={() => setTip(tipPercent)}
                   style={{
-                    padding: "14px",
-                    fontSize: "16px",
+                    padding: "12px 8px",
+                    fontSize: "15px",
                     fontWeight: "600",
                     border: tip === tipPercent ? "2px solid #4a90e2" : "2px solid #e1e5e9",
                     borderRadius: "10px",
