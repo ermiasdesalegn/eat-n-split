@@ -202,35 +202,47 @@ function App() {
                 </button>
               ))}
             </div>
-            <input
-              type="number"
-              value={tip}
-              onChange={(e) => setTip(Number(e.target.value) || 0)}
-              placeholder="Enter custom %"
-              style={{
-                width: "100%",
-                padding: "14px 16px",
+            <div style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center"
+            }}>
+              <input
+                type="number"
+                value={tip}
+                onChange={(e) => setTip(Number(e.target.value) || 0)}
+                placeholder="Custom"
+                style={{
+                  width: "100%",
+                  padding: "14px 16px 14px 40px",
+                  fontSize: "16px",
+                  border: "2px solid #e1e5e9",
+                  borderRadius: "10px",
+                  backgroundColor: "#fafbfc",
+                  outline: "none",
+                  color: "#1a1a1a",
+                  transition: "all 0.2s",
+                  fontWeight: "500"
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#4a90e2";
+                  e.target.style.backgroundColor = "#fff";
+                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#e1e5e9";
+                  e.target.style.backgroundColor = "#fafbfc";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+              <span style={{
+                position: "absolute",
+                right: "16px",
                 fontSize: "16px",
-                border: "2px solid #e1e5e9",
-                borderRadius: "10px",
-                backgroundColor: "#fafbfc",
-                outline: "none",
-                color: "#1a1a1a",
-                transition: "all 0.2s",
-                textAlign: "center",
+                color: "#666",
                 fontWeight: "500"
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#4a90e2";
-                e.target.style.backgroundColor = "#fff";
-                e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#e1e5e9";
-                e.target.style.backgroundColor = "#fafbfc";
-                e.target.style.boxShadow = "none";
-              }}
-            />
+              }}>%</span>
+            </div>
           </div>
 
           <div style={{ marginBottom: "0" }}>
