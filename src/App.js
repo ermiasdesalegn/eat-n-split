@@ -331,50 +331,50 @@ function App() {
             </div>
           </div>
 
-          <div style={{ marginBottom: "32px" }}>
+          <div style={{ marginBottom: "40px" }}>
             <label style={{
               display: "block",
-              fontSize: "14px",
-              color: "#333",
-              marginBottom: "12px",
-              fontWeight: "500"
+              fontSize: "13px",
+              color: "#666",
+              marginBottom: "8px",
+              fontWeight: "400",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px"
             }}>
               Rounding
             </label>
             <div style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "10px"
+              gap: "8px"
             }}>
               {[
                 { value: "none", label: "None" },
-                { value: "up", label: "Round Up" },
-                { value: "down", label: "Round Down" }
+                { value: "up", label: "Up" },
+                { value: "down", label: "Down" }
               ].map(option => (
                 <button
                   key={option.value}
                   onClick={() => setRounding(option.value)}
                   style={{
-                    padding: "12px 8px",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    border: rounding === option.value ? "2px solid #667eea" : "2px solid #e1e5e9",
-                    borderRadius: "12px",
-                    backgroundColor: rounding === option.value ? "#f0edff" : "#fafbfc",
-                    color: rounding === option.value ? "#667eea" : "#333",
+                    padding: "10px",
+                    fontSize: "13px",
+                    fontWeight: "400",
+                    border: rounding === option.value ? "1px solid #000" : "1px solid #e5e5e5",
+                    borderRadius: "4px",
+                    backgroundColor: rounding === option.value ? "#000" : "#fff",
+                    color: rounding === option.value ? "#fff" : "#000",
                     cursor: "pointer",
-                    transition: "all 0.2s"
+                    transition: "all 0.15s"
                   }}
                   onMouseEnter={(e) => {
                     if (rounding !== option.value) {
-                      e.target.style.borderColor = "#667eea";
-                      e.target.style.backgroundColor = "#f8f6ff";
+                      e.target.style.borderColor = "#999";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (rounding !== option.value) {
-                      e.target.style.borderColor = "#e1e5e9";
-                      e.target.style.backgroundColor = "#fafbfc";
+                      e.target.style.borderColor = "#e5e5e5";
                     }
                   }}
                 >
