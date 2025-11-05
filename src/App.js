@@ -3,24 +3,56 @@ import { useEffect, useState } from "react";
 function App() {
   const [bill, setBill] = useState("");
   const [tip, setTip] = useState(15);
+  const [tax, setTax] = useState(0);
   const [people, setPeople] = useState(1);
+  const [rounding, setRounding] = useState("none"); // "none", "up", "down"
   const [copied, setCopied] = useState(false);
 
   // Load preferences from localStorage
   useEffect(() => {
     const savedTip = localStorage.getItem('tipPercentage');
     if (savedTip) setTip(Number(savedTip));
+    const savedTax = localStorage.getItem('taxPercentage');
+    if (savedTax) setTax(Number(savedTax));
   }, []);
 
-  // Save tip preference
+  // Save preferences
   useEffect(() => {
     if (tip > 0) {
       localStorage.setItem('tipPercentage', tip.toString());
     }
   }, [tip]);
 
-  const tipAmount = bill ? (bill * tip / 100) : 0;
-  const total = bill ? parseFloat(bill) + tipAmount : 0;
+  useEffect(() => {
+    if (tax >= 0) {
+      localStorage.setItem('taxPercentage', tax.toString());
+    }
+  }, [tax]);
+
+  function roundAmount(amount, method) {
+    if (method === "up") {
+      return Math.ceil(amount);
+    } else if (method === "down") {
+      return Math.floor(amount);
+    }
+    return amount;
+  }
+
+  const billAmount = bill ? parseFloat(bill) : 0;
+  const taxAmount = billAmount * (tax / 100);
+  const subtotal = billAmount + taxAmount;
+  let tipAmount = subtotal * (tip / 100);
+  let total = subtotal + tipAmount;
+  
+  // Apply rounding if selected
+  let adjustedTipAmount = tipAmount;
+  if (rounding !== "none" && billAmount > 0) {
+    total = roundAmount(total, rounding);
+    // Adjust tip amount to match rounded total
+    adjustedTipAmount = total - subtotal;
+    if (adjustedTipAmount < 0) adjustedTipAmount = 0;
+  }
+  
   const perPerson = people > 0 ? total / people : 0;
 
   const quickTips = [10, 15, 18, 20, 25];
@@ -35,7 +67,20 @@ function App() {
   }
 
   function copyToClipboard() {
-    const text = `Tip Calculator Summary\n\nBill: ${formatCurrency(bill)}\nTip (${tip}%): ${formatCurrency(tipAmount)}\nTotal: ${formatCurrency(total)}${people > 1 ? `\nPer Person (${people} people): ${formatCurrency(perPerson)}` : ''}`;
+    let text = `Tip Calculator Summary\n\n`;
+    text += `Bill: ${formatCurrency(billAmount)}\n`;
+    if (tax > 0) {
+      text += `Tax (${tax}%): ${formatCurrency(taxAmount)}\n`;
+      text += `Subtotal: ${formatCurrency(subtotal)}\n`;
+    }
+    text += `Tip (${tip}%): ${formatCurrency(rounding !== "none" ? adjustedTipAmount : tipAmount)}\n`;
+    if (rounding !== "none") {
+      text += `Rounding: ${rounding === "up" ? "Round Up" : "Round Down"}\n`;
+    }
+    text += `Total: ${formatCurrency(total)}`;
+    if (people > 1) {
+      text += `\nPer Person (${people} people): ${formatCurrency(perPerson)}`;
+    }
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -126,7 +171,12 @@ function App() {
               <input
                 type="number"
                 value={bill}
-                onChange={(e) => setBill(e.target.value)}
+                onChange={(e) => {
+                const value = e.target.value;
+                if (value === "" || (!isNaN(value) && value >= 0)) {
+                  setBill(value);
+                }
+              }}
                 placeholder="0.00"
                 style={{
                   width: "100%",
@@ -242,6 +292,112 @@ function App() {
                 color: "#666",
                 fontWeight: "500"
               }}>%</span>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "32px" }}>
+            <label style={{
+              display: "block",
+              fontSize: "14px",
+              color: "#333",
+              marginBottom: "12px",
+              fontWeight: "500"
+            }}>
+              Tax % (Optional)
+            </label>
+            <div style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center"
+            }}>
+              <input
+                type="number"
+                value={tax || ""}
+                onChange={(e) => setTax(Math.max(0, Number(e.target.value) || 0))}
+                placeholder="0"
+                style={{
+                  width: "100%",
+                  padding: "14px 16px 14px 16px",
+                  fontSize: "16px",
+                  border: "2px solid #e1e5e9",
+                  borderRadius: "10px",
+                  backgroundColor: "#fafbfc",
+                  outline: "none",
+                  color: "#1a1a1a",
+                  transition: "all 0.2s",
+                  fontWeight: "500"
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#4a90e2";
+                  e.target.style.backgroundColor = "#fff";
+                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#e1e5e9";
+                  e.target.style.backgroundColor = "#fafbfc";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+              <span style={{
+                position: "absolute",
+                right: "16px",
+                fontSize: "16px",
+                color: "#666",
+                fontWeight: "500"
+              }}>%</span>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: "32px" }}>
+            <label style={{
+              display: "block",
+              fontSize: "14px",
+              color: "#333",
+              marginBottom: "12px",
+              fontWeight: "500"
+            }}>
+              Rounding
+            </label>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "10px"
+            }}>
+              {[
+                { value: "none", label: "None" },
+                { value: "up", label: "Round Up" },
+                { value: "down", label: "Round Down" }
+              ].map(option => (
+                <button
+                  key={option.value}
+                  onClick={() => setRounding(option.value)}
+                  style={{
+                    padding: "12px 8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    border: rounding === option.value ? "2px solid #4a90e2" : "2px solid #e1e5e9",
+                    borderRadius: "10px",
+                    backgroundColor: rounding === option.value ? "#e8f2ff" : "#fafbfc",
+                    color: rounding === option.value ? "#4a90e2" : "#333",
+                    cursor: "pointer",
+                    transition: "all 0.2s"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (rounding !== option.value) {
+                      e.target.style.borderColor = "#4a90e2";
+                      e.target.style.backgroundColor = "#f0f7ff";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (rounding !== option.value) {
+                      e.target.style.borderColor = "#e1e5e9";
+                      e.target.style.backgroundColor = "#fafbfc";
+                    }
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -444,7 +600,7 @@ function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "24px"
+                    marginBottom: "20px"
                   }}>
                     <div>
                       <div style={{
@@ -455,22 +611,75 @@ function App() {
                         Bill
                       </div>
                       <div style={{
-                        fontSize: "32px",
+                        fontSize: "28px",
                         fontWeight: "600",
                         color: "#fff"
                       }}>
-                        {formatCurrency(parseFloat(bill))}
+                        {formatCurrency(billAmount)}
                       </div>
                     </div>
                   </div>
+
+                  {tax > 0 && (
+                    <>
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: "20px"
+                      }}>
+                        <div>
+                          <div style={{
+                            fontSize: "14px",
+                            color: "#94a3b8",
+                            marginBottom: "4px"
+                          }}>
+                            Tax ({tax}%)
+                          </div>
+                          <div style={{
+                            fontSize: "24px",
+                            fontWeight: "600",
+                            color: "#94a3b8"
+                          }}>
+                            {formatCurrency(taxAmount)}
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: "20px",
+                        paddingBottom: "20px",
+                        borderBottom: "1px solid rgba(255,255,255,0.1)"
+                      }}>
+                        <div>
+                          <div style={{
+                            fontSize: "14px",
+                            color: "#94a3b8",
+                            marginBottom: "4px"
+                          }}>
+                            Subtotal
+                          </div>
+                          <div style={{
+                            fontSize: "24px",
+                            fontWeight: "600",
+                            color: "#fff"
+                          }}>
+                            {formatCurrency(subtotal)}
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   <div style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "24px",
-                    paddingBottom: "24px",
-                    borderBottom: "1px solid rgba(255,255,255,0.1)"
+                    marginBottom: "20px",
+                    paddingBottom: tax > 0 ? "20px" : "24px",
+                    borderBottom: tax > 0 ? "1px solid rgba(255,255,255,0.1)" : "none"
                   }}>
                     <div>
                       <div style={{
@@ -485,10 +694,21 @@ function App() {
                         fontWeight: "600",
                         color: "#4a90e2"
                       }}>
-                        {formatCurrency(tipAmount)}
+                        {formatCurrency(rounding !== "none" ? adjustedTipAmount : tipAmount)}
                       </div>
                     </div>
                   </div>
+
+                  {rounding !== "none" && (
+                    <div style={{
+                      fontSize: "12px",
+                      color: "#94a3b8",
+                      marginBottom: "12px",
+                      fontStyle: "italic"
+                    }}>
+                      {rounding === "up" ? "↗ Rounded up" : "↘ Rounded down"}
+                    </div>
+                  )}
 
                   <div style={{
                     display: "flex",
@@ -563,7 +783,9 @@ function App() {
               onClick={() => {
                 setBill("");
                 setTip(15);
+                setTax(0);
                 setPeople(1);
+                setRounding("none");
               }}
               style={{
                 width: "100%",
@@ -599,3 +821,4 @@ function App() {
 }
 
 export default App;
+
