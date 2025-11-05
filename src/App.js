@@ -100,7 +100,7 @@ function App() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       padding: "40px 20px",
       fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
     }}>
@@ -108,8 +108,8 @@ function App() {
         width: "100%",
         maxWidth: "900px",
         backgroundColor: "#fff",
-        borderRadius: "24px",
-        boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08)",
+        borderRadius: "28px",
+        boxShadow: "0 20px 60px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.1)",
         overflow: "hidden",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -131,10 +131,13 @@ function App() {
           backgroundColor: "#fff"
         }}>
           <h1 style={{
-            fontSize: "32px",
-            fontWeight: "600",
+            fontSize: "36px",
+            fontWeight: "700",
             marginBottom: "8px",
-            color: "#1a1a1a",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
             letterSpacing: "-0.5px"
           }}>
             Tip Calculator
@@ -191,9 +194,9 @@ function App() {
                   fontWeight: "500"
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "#4a90e2";
+                  e.target.style.borderColor = "#667eea";
                   e.target.style.backgroundColor = "#fff";
-                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                  e.target.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.1)";
                 }}
                 onBlur={(e) => {
                   e.target.style.borderColor = "#e1e5e9";
@@ -228,17 +231,17 @@ function App() {
                     padding: "12px 8px",
                     fontSize: "15px",
                     fontWeight: "600",
-                    border: tip === tipPercent ? "2px solid #4a90e2" : "2px solid #e1e5e9",
-                    borderRadius: "10px",
-                    backgroundColor: tip === tipPercent ? "#e8f2ff" : "#fafbfc",
-                    color: tip === tipPercent ? "#4a90e2" : "#333",
+                    border: tip === tipPercent ? "2px solid #667eea" : "2px solid #e1e5e9",
+                    borderRadius: "12px",
+                    backgroundColor: tip === tipPercent ? "#f0edff" : "#fafbfc",
+                    color: tip === tipPercent ? "#667eea" : "#333",
                     cursor: "pointer",
                     transition: "all 0.2s"
                   }}
                   onMouseEnter={(e) => {
                     if (tip !== tipPercent) {
-                      e.target.style.borderColor = "#4a90e2";
-                      e.target.style.backgroundColor = "#f0f7ff";
+                      e.target.style.borderColor = "#667eea";
+                      e.target.style.backgroundColor = "#f8f6ff";
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -275,9 +278,9 @@ function App() {
                   fontWeight: "500"
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "#4a90e2";
+                  e.target.style.borderColor = "#667eea";
                   e.target.style.backgroundColor = "#fff";
-                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                  e.target.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.1)";
                 }}
                 onBlur={(e) => {
                   e.target.style.borderColor = "#e1e5e9";
@@ -328,9 +331,9 @@ function App() {
                   fontWeight: "500"
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "#4a90e2";
+                  e.target.style.borderColor = "#667eea";
                   e.target.style.backgroundColor = "#fff";
-                  e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
+                  e.target.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.1)";
                 }}
                 onBlur={(e) => {
                   e.target.style.borderColor = "#e1e5e9";
@@ -375,17 +378,17 @@ function App() {
                     padding: "12px 8px",
                     fontSize: "14px",
                     fontWeight: "600",
-                    border: rounding === option.value ? "2px solid #4a90e2" : "2px solid #e1e5e9",
-                    borderRadius: "10px",
-                    backgroundColor: rounding === option.value ? "#e8f2ff" : "#fafbfc",
-                    color: rounding === option.value ? "#4a90e2" : "#333",
+                    border: rounding === option.value ? "2px solid #667eea" : "2px solid #e1e5e9",
+                    borderRadius: "12px",
+                    backgroundColor: rounding === option.value ? "#f0edff" : "#fafbfc",
+                    color: rounding === option.value ? "#667eea" : "#333",
                     cursor: "pointer",
                     transition: "all 0.2s"
                   }}
                   onMouseEnter={(e) => {
                     if (rounding !== option.value) {
-                      e.target.style.borderColor = "#4a90e2";
-                      e.target.style.backgroundColor = "#f0f7ff";
+                      e.target.style.borderColor = "#667eea";
+                      e.target.style.backgroundColor = "#f8f6ff";
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -437,8 +440,8 @@ function App() {
                 }}
                 onMouseEnter={(e) => {
                   if (people > 1) {
-                    e.target.style.borderColor = "#4a90e2";
-                    e.target.style.backgroundColor = "#e8f2ff";
+                    e.target.style.borderColor = "#667eea";
+                    e.target.style.backgroundColor = "#f0edff";
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -515,8 +518,8 @@ function App() {
                 }}
                 onMouseEnter={(e) => {
                   if (people < 20) {
-                    e.target.style.borderColor = "#4a90e2";
-                    e.target.style.backgroundColor = "#e8f2ff";
+                    e.target.style.borderColor = "#667eea";
+                    e.target.style.backgroundColor = "#f0edff";
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -535,7 +538,7 @@ function App() {
         {/* Right Panel - Results */}
         <div style={{
           padding: "50px",
-          backgroundColor: "#1a1f2e",
+          background: "linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%)",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
@@ -563,7 +566,7 @@ function App() {
                     padding: "10px 16px",
                     fontSize: "13px",
                     fontWeight: "600",
-                    backgroundColor: copied ? "#4a90e2" : "rgba(255,255,255,0.1)",
+                    backgroundColor: copied ? "#667eea" : "rgba(255,255,255,0.1)",
                     color: copied ? "#fff" : "#94a3b8",
                     border: "1px solid rgba(255,255,255,0.2)",
                     borderRadius: "8px",
@@ -692,7 +695,7 @@ function App() {
                       <div style={{
                         fontSize: "32px",
                         fontWeight: "600",
-                        color: "#4a90e2"
+                        color: "#a78bfa"
                       }}>
                         {formatCurrency(rounding !== "none" ? adjustedTipAmount : tipAmount)}
                       </div>
@@ -725,9 +728,12 @@ function App() {
                         Total
                       </div>
                       <div style={{
-                        fontSize: "36px",
+                        fontSize: "40px",
                         fontWeight: "700",
-                        color: "#fff"
+                        background: "linear-gradient(135deg, #fff 0%, #e0e7ff 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text"
                       }}>
                         {formatCurrency(total)}
                       </div>
@@ -750,7 +756,7 @@ function App() {
                       <div style={{
                         fontSize: "28px",
                         fontWeight: "600",
-                        color: "#4a90e2"
+                        color: "#a78bfa"
                       }}>
                         {formatCurrency(perPerson)}
                       </div>
@@ -792,7 +798,7 @@ function App() {
                 padding: "16px",
                 fontSize: "16px",
                 fontWeight: "600",
-                backgroundColor: "#4a90e2",
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                 color: "#fff",
                 border: "none",
                 borderRadius: "12px",
@@ -801,12 +807,12 @@ function App() {
                 marginTop: "auto"
               }}
               onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "#357abd";
+                e.target.style.background = "linear-gradient(135deg, #5568d3 0%, #6b4290 100%)";
                 e.target.style.transform = "translateY(-2px)";
-                e.target.style.boxShadow = "0 8px 20px rgba(74, 144, 226, 0.3)";
+                e.target.style.boxShadow = "0 8px 20px rgba(102, 126, 234, 0.4)";
               }}
               onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#4a90e2";
+                e.target.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
                 e.target.style.transform = "translateY(0)";
                 e.target.style.boxShadow = "none";
               }}
