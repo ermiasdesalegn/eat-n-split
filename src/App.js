@@ -498,8 +498,8 @@ function App() {
 
         {/* Right Panel - Results */}
         <div style={{
-          padding: "50px",
-          background: "linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%)",
+          padding: "60px 50px",
+          backgroundColor: "#000",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
@@ -510,13 +510,15 @@ function App() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: "40px"
+              marginBottom: "48px"
             }}>
               <h2 style={{
-                fontSize: "24px",
-                fontWeight: "600",
+                fontSize: "13px",
+                fontWeight: "400",
                 margin: 0,
-                color: "#fff"
+                color: "#999",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px"
               }}>
                 Summary
               </h2>
@@ -524,33 +526,30 @@ function App() {
                 <button
                   onClick={copyToClipboard}
                   style={{
-                    padding: "10px 16px",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    backgroundColor: copied ? "#667eea" : "rgba(255,255,255,0.1)",
-                    color: copied ? "#fff" : "#94a3b8",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    borderRadius: "8px",
+                    padding: "6px 12px",
+                    fontSize: "12px",
+                    fontWeight: "400",
+                    backgroundColor: "transparent",
+                    color: copied ? "#fff" : "#999",
+                    border: "1px solid #333",
+                    borderRadius: "4px",
                     cursor: "pointer",
-                    transition: "all 0.2s",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px"
+                    transition: "all 0.15s"
                   }}
                   onMouseEnter={(e) => {
                     if (!copied) {
-                      e.target.style.backgroundColor = "rgba(255,255,255,0.15)";
+                      e.target.style.borderColor = "#666";
                       e.target.style.color = "#fff";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!copied) {
-                      e.target.style.backgroundColor = "rgba(255,255,255,0.1)";
-                      e.target.style.color = "#94a3b8";
+                      e.target.style.borderColor = "#333";
+                      e.target.style.color = "#999";
                     }
                   }}
                 >
-                  {copied ? "✓ Copied!" : "📋 Copy"}
+                  {copied ? "Copied" : "Copy"}
                 </button>
               )}
             </div>
