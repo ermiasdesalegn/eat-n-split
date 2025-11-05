@@ -117,25 +117,23 @@ function App() {
       }}>
         {/* Left Panel - Inputs */}
         <div style={{
-          padding: "50px",
+          padding: "60px 50px",
           backgroundColor: "#fff"
         }}>
           <h1 style={{
-            fontSize: "36px",
-            fontWeight: "700",
+            fontSize: "28px",
+            fontWeight: "400",
             marginBottom: "8px",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
+            color: "#000",
             letterSpacing: "-0.5px"
           }}>
             Tip Calculator
           </h1>
           <p style={{
             fontSize: "14px",
-            color: "#666",
-            marginBottom: "40px"
+            color: "#999",
+            marginBottom: "48px",
+            fontWeight: "300"
           }}>
             Calculate tip and split the bill
           </p>
