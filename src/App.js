@@ -560,163 +560,148 @@ function App() {
                   marginBottom: "32px"
                 }}>
                   <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "20px"
+                    marginBottom: "32px"
                   }}>
-                    <div>
-                      <div style={{
-                        fontSize: "14px",
-                        color: "#94a3b8",
-                        marginBottom: "4px"
-                      }}>
-                        Bill
-                      </div>
-                      <div style={{
-                        fontSize: "28px",
-                        fontWeight: "600",
-                        color: "#fff"
-                      }}>
-                        {formatCurrency(billAmount)}
-                      </div>
+                    <div style={{
+                      fontSize: "12px",
+                      color: "#666",
+                      marginBottom: "6px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>
+                      Bill
+                    </div>
+                    <div style={{
+                      fontSize: "32px",
+                      fontWeight: "400",
+                      color: "#fff"
+                    }}>
+                      {formatCurrency(billAmount)}
                     </div>
                   </div>
 
                   {tax > 0 && (
                     <>
                       <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        marginBottom: "20px"
+                        marginBottom: "24px",
+                        paddingBottom: "24px",
+                        borderBottom: "1px solid #333"
                       }}>
-                        <div>
-                          <div style={{
-                            fontSize: "14px",
-                            color: "#94a3b8",
-                            marginBottom: "4px"
-                          }}>
-                            Tax ({tax}%)
-                          </div>
-                          <div style={{
-                            fontSize: "24px",
-                            fontWeight: "600",
-                            color: "#94a3b8"
-                          }}>
-                            {formatCurrency(taxAmount)}
-                          </div>
+                        <div style={{
+                          fontSize: "12px",
+                          color: "#666",
+                          marginBottom: "6px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px"
+                        }}>
+                          Tax ({tax}%)
+                        </div>
+                        <div style={{
+                          fontSize: "20px",
+                          fontWeight: "400",
+                          color: "#999"
+                        }}>
+                          {formatCurrency(taxAmount)}
                         </div>
                       </div>
                       <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        marginBottom: "20px",
-                        paddingBottom: "20px",
-                        borderBottom: "1px solid rgba(255,255,255,0.1)"
+                        marginBottom: "24px",
+                        paddingBottom: "24px",
+                        borderBottom: "1px solid #333"
                       }}>
-                        <div>
-                          <div style={{
-                            fontSize: "14px",
-                            color: "#94a3b8",
-                            marginBottom: "4px"
-                          }}>
-                            Subtotal
-                          </div>
-                          <div style={{
-                            fontSize: "24px",
-                            fontWeight: "600",
-                            color: "#fff"
-                          }}>
-                            {formatCurrency(subtotal)}
-                          </div>
+                        <div style={{
+                          fontSize: "12px",
+                          color: "#666",
+                          marginBottom: "6px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px"
+                        }}>
+                          Subtotal
+                        </div>
+                        <div style={{
+                          fontSize: "20px",
+                          fontWeight: "400",
+                          color: "#fff"
+                        }}>
+                          {formatCurrency(subtotal)}
                         </div>
                       </div>
                     </>
                   )}
 
                   <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "20px",
-                    paddingBottom: tax > 0 ? "20px" : "24px",
-                    borderBottom: tax > 0 ? "1px solid rgba(255,255,255,0.1)" : "none"
+                    marginBottom: "32px",
+                    paddingBottom: "32px",
+                    borderBottom: tax > 0 ? "1px solid #333" : "none"
                   }}>
-                    <div>
-                      <div style={{
-                        fontSize: "14px",
-                        color: "#94a3b8",
-                        marginBottom: "4px"
-                      }}>
-                        Tip ({tip}%)
-                      </div>
-                      <div style={{
-                        fontSize: "32px",
-                        fontWeight: "600",
-                        color: "#a78bfa"
-                      }}>
-                        {formatCurrency(rounding !== "none" ? adjustedTipAmount : tipAmount)}
-                      </div>
+                    <div style={{
+                      fontSize: "12px",
+                      color: "#666",
+                      marginBottom: "6px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>
+                      Tip ({tip}%)
+                    </div>
+                    <div style={{
+                      fontSize: "24px",
+                      fontWeight: "400",
+                      color: "#fff"
+                    }}>
+                      {formatCurrency(rounding !== "none" ? adjustedTipAmount : tipAmount)}
                     </div>
                   </div>
 
                   {rounding !== "none" && (
                     <div style={{
-                      fontSize: "12px",
-                      color: "#94a3b8",
-                      marginBottom: "12px",
+                      fontSize: "11px",
+                      color: "#666",
+                      marginBottom: "16px",
                       fontStyle: "italic"
                     }}>
-                      {rounding === "up" ? "↗ Rounded up" : "↘ Rounded down"}
+                      {rounding === "up" ? "Rounded up" : "Rounded down"}
                     </div>
                   )}
 
                   <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "24px"
+                    marginBottom: "32px"
                   }}>
-                    <div>
-                      <div style={{
-                        fontSize: "14px",
-                        color: "#94a3b8",
-                        marginBottom: "4px"
-                      }}>
-                        Total
-                      </div>
-                      <div style={{
-                        fontSize: "40px",
-                        fontWeight: "700",
-                        background: "linear-gradient(135deg, #fff 0%, #e0e7ff 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text"
-                      }}>
-                        {formatCurrency(total)}
-                      </div>
+                    <div style={{
+                      fontSize: "12px",
+                      color: "#666",
+                      marginBottom: "6px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    }}>
+                      Total
+                    </div>
+                    <div style={{
+                      fontSize: "48px",
+                      fontWeight: "400",
+                      color: "#fff"
+                    }}>
+                      {formatCurrency(total)}
                     </div>
                   </div>
 
                   {people > 1 && (
                     <div style={{
-                      marginTop: "32px",
-                      paddingTop: "24px",
-                      borderTop: "2px solid rgba(255,255,255,0.2)"
+                      paddingTop: "32px",
+                      borderTop: "1px solid #333"
                     }}>
                       <div style={{
-                        fontSize: "14px",
-                        color: "#94a3b8",
-                        marginBottom: "8px"
+                        fontSize: "12px",
+                        color: "#666",
+                        marginBottom: "6px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.5px"
                       }}>
                         Per Person ({people} {people === 1 ? 'person' : 'people'})
                       </div>
                       <div style={{
                         fontSize: "28px",
-                        fontWeight: "600",
-                        color: "#a78bfa"
+                        fontWeight: "400",
+                        color: "#fff"
                       }}>
                         {formatCurrency(perPerson)}
                       </div>
@@ -726,17 +711,13 @@ function App() {
               </>
             ) : (
               <div style={{
-                padding: "60px 20px",
+                padding: "40px 20px",
                 textAlign: "center"
               }}>
                 <div style={{
-                  fontSize: "48px",
-                  marginBottom: "20px",
-                  opacity: 0.3
-                }}>💡</div>
-                <div style={{
-                  fontSize: "16px",
-                  color: "#94a3b8"
+                  fontSize: "14px",
+                  color: "#666",
+                  fontWeight: "300"
                 }}>
                   Enter your bill amount to see the breakdown
                 </div>
@@ -755,26 +736,26 @@ function App() {
               }}
               style={{
                 width: "100%",
-                padding: "16px",
-                fontSize: "16px",
-                fontWeight: "600",
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                color: "#fff",
-                border: "none",
-                borderRadius: "12px",
+                padding: "14px",
+                fontSize: "13px",
+                fontWeight: "400",
+                backgroundColor: "#fff",
+                color: "#000",
+                border: "1px solid #e5e5e5",
+                borderRadius: "4px",
                 cursor: "pointer",
-                transition: "all 0.2s",
-                marginTop: "auto"
+                transition: "all 0.15s",
+                marginTop: "auto",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px"
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = "linear-gradient(135deg, #5568d3 0%, #6b4290 100%)";
-                e.target.style.transform = "translateY(-2px)";
-                e.target.style.boxShadow = "0 8px 20px rgba(102, 126, 234, 0.4)";
+                e.target.style.borderColor = "#000";
+                e.target.style.backgroundColor = "#fafafa";
               }}
               onMouseLeave={(e) => {
-                e.target.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-                e.target.style.transform = "translateY(0)";
-                e.target.style.boxShadow = "none";
+                e.target.style.borderColor = "#e5e5e5";
+                e.target.style.backgroundColor = "#fff";
               }}
             >
               Reset
