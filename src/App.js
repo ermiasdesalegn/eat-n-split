@@ -387,32 +387,34 @@ function App() {
           <div style={{ marginBottom: "0" }}>
             <label style={{
               display: "block",
-              fontSize: "14px",
-              color: "#333",
-              marginBottom: "12px",
-              fontWeight: "500"
+              fontSize: "13px",
+              color: "#666",
+              marginBottom: "8px",
+              fontWeight: "400",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px"
             }}>
               Number of People
             </label>
             <div style={{
               display: "flex",
-              gap: "12px",
+              gap: "8px",
               alignItems: "center"
             }}>
               <button
                 onClick={decrementPeople}
                 disabled={people <= 1}
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  fontSize: "24px",
-                  fontWeight: "600",
-                  border: "2px solid #e1e5e9",
-                  borderRadius: "12px",
-                  backgroundColor: people <= 1 ? "#f5f5f5" : "#fafbfc",
-                  color: people <= 1 ? "#ccc" : "#333",
+                  width: "40px",
+                  height: "40px",
+                  fontSize: "18px",
+                  fontWeight: "400",
+                  border: "1px solid #e5e5e5",
+                  borderRadius: "4px",
+                  backgroundColor: people <= 1 ? "#fafafa" : "#fff",
+                  color: people <= 1 ? "#ccc" : "#000",
                   cursor: people <= 1 ? "not-allowed" : "pointer",
-                  transition: "all 0.2s",
+                  transition: "border-color 0.15s",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -420,77 +422,58 @@ function App() {
                 }}
                 onMouseEnter={(e) => {
                   if (people > 1) {
-                    e.target.style.borderColor = "#667eea";
-                    e.target.style.backgroundColor = "#f0edff";
+                    e.target.style.borderColor = "#000";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (people > 1) {
-                    e.target.style.borderColor = "#e1e5e9";
-                    e.target.style.backgroundColor = "#fafbfc";
+                    e.target.style.borderColor = "#e5e5e5";
                   }
                 }}
               >
                 −
               </button>
-              <div style={{
-                position: "relative",
-                flex: 1
-              }}>
-                <span style={{
-                  position: "absolute",
-                  left: "16px",
-                  fontSize: "18px",
-                  color: "#666",
-                  top: "50%",
-                  transform: "translateY(-50%)"
-                }}>👥</span>
-                <input
-                  type="number"
-                  value={people}
-                  onChange={(e) => setPeople(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
-                  min="1"
-                  max="20"
-                  placeholder="1"
-                  style={{
-                    width: "100%",
-                    padding: "16px 16px 16px 44px",
-                    fontSize: "18px",
-                    border: "2px solid #e1e5e9",
-                    borderRadius: "12px",
-                    backgroundColor: "#fafbfc",
-                    outline: "none",
-                    color: "#1a1a1a",
-                    transition: "all 0.2s",
-                    fontWeight: "500",
-                    textAlign: "center"
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "#4a90e2";
-                    e.target.style.backgroundColor = "#fff";
-                    e.target.style.boxShadow = "0 0 0 4px rgba(74, 144, 226, 0.1)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "#e1e5e9";
-                    e.target.style.backgroundColor = "#fafbfc";
-                    e.target.style.boxShadow = "none";
-                  }}
-                />
-              </div>
+              <input
+                type="number"
+                value={people}
+                onChange={(e) => setPeople(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+                min="1"
+                max="20"
+                placeholder="1"
+                style={{
+                  flex: 1,
+                  padding: "14px",
+                  fontSize: "14px",
+                  border: "1px solid #e5e5e5",
+                  borderRadius: "4px",
+                  backgroundColor: "#fff",
+                  outline: "none",
+                  color: "#000",
+                  transition: "border-color 0.2s",
+                  fontWeight: "400",
+                  textAlign: "center"
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#000";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#e5e5e5";
+                }}
+              />
               <button
                 onClick={incrementPeople}
                 disabled={people >= 20}
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  fontSize: "24px",
-                  fontWeight: "600",
-                  border: "2px solid #e1e5e9",
-                  borderRadius: "12px",
-                  backgroundColor: people >= 20 ? "#f5f5f5" : "#fafbfc",
-                  color: people >= 20 ? "#ccc" : "#333",
+                  width: "40px",
+                  height: "40px",
+                  fontSize: "18px",
+                  fontWeight: "400",
+                  border: "1px solid #e5e5e5",
+                  borderRadius: "4px",
+                  backgroundColor: people >= 20 ? "#fafafa" : "#fff",
+                  color: people >= 20 ? "#ccc" : "#000",
                   cursor: people >= 20 ? "not-allowed" : "pointer",
-                  transition: "all 0.2s",
+                  transition: "border-color 0.15s",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -498,14 +481,12 @@ function App() {
                 }}
                 onMouseEnter={(e) => {
                   if (people < 20) {
-                    e.target.style.borderColor = "#667eea";
-                    e.target.style.backgroundColor = "#f0edff";
+                    e.target.style.borderColor = "#000";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (people < 20) {
-                    e.target.style.borderColor = "#e1e5e9";
-                    e.target.style.backgroundColor = "#fafbfc";
+                    e.target.style.borderColor = "#e5e5e5";
                   }
                 }}
               >
