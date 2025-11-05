@@ -100,31 +100,21 @@ function App() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      padding: "40px 20px",
-      fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+      backgroundColor: "#fafafa",
+      padding: "60px 20px",
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif"
     }}>
       <div style={{
         width: "100%",
-        maxWidth: "900px",
+        maxWidth: "800px",
         backgroundColor: "#fff",
-        borderRadius: "28px",
-        boxShadow: "0 20px 60px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.1)",
+        borderRadius: "8px",
+        border: "1px solid #e5e5e5",
         overflow: "hidden",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: "0",
-        transition: "transform 0.3s ease, box-shadow 0.3s ease"
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = "0 24px 70px rgba(0,0,0,0.15), 0 10px 30px rgba(0,0,0,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08)";
-      }}
-      >
+        gap: "0"
+      }}>
         {/* Left Panel - Inputs */}
         <div style={{
           padding: "50px",
