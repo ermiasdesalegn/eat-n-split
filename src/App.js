@@ -280,13 +280,15 @@ function App() {
             </div>
           </div>
 
-          <div style={{ marginBottom: "32px" }}>
+          <div style={{ marginBottom: "40px" }}>
             <label style={{
               display: "block",
-              fontSize: "14px",
-              color: "#333",
-              marginBottom: "12px",
-              fontWeight: "500"
+              fontSize: "13px",
+              color: "#666",
+              marginBottom: "8px",
+              fontWeight: "400",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px"
             }}>
               Tax % (Optional)
             </label>
@@ -302,33 +304,29 @@ function App() {
                 placeholder="0"
                 style={{
                   width: "100%",
-                  padding: "14px 16px 14px 16px",
-                  fontSize: "16px",
-                  border: "2px solid #e1e5e9",
-                  borderRadius: "10px",
-                  backgroundColor: "#fafbfc",
+                  padding: "14px 14px 14px 14px",
+                  fontSize: "14px",
+                  border: "1px solid #e5e5e5",
+                  borderRadius: "4px",
+                  backgroundColor: "#fff",
                   outline: "none",
-                  color: "#1a1a1a",
-                  transition: "all 0.2s",
-                  fontWeight: "500"
+                  color: "#000",
+                  transition: "border-color 0.2s",
+                  fontWeight: "400"
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "#667eea";
-                  e.target.style.backgroundColor = "#fff";
-                  e.target.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.1)";
+                  e.target.style.borderColor = "#000";
                 }}
                 onBlur={(e) => {
-                  e.target.style.borderColor = "#e1e5e9";
-                  e.target.style.backgroundColor = "#fafbfc";
-                  e.target.style.boxShadow = "none";
+                  e.target.style.borderColor = "#e5e5e5";
                 }}
               />
               <span style={{
                 position: "absolute",
-                right: "16px",
-                fontSize: "16px",
-                color: "#666",
-                fontWeight: "500"
+                right: "12px",
+                fontSize: "14px",
+                color: "#999",
+                fontWeight: "400"
               }}>%</span>
             </div>
           </div>
